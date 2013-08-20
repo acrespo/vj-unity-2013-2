@@ -13,6 +13,8 @@ public class AlienMovement : MonoBehaviour {
 	
 	public float delta = 1;
 	
+	public float drop = 3;
+	
 	private float movementInDirection = 0;
 	
 	private float direction = 1;
@@ -45,11 +47,12 @@ public class AlienMovement : MonoBehaviour {
 		
 		Vector3 move = new Vector3(delta * direction, 0, 0);
 		
-		if (movementInDirection >= movementBeforeTurn) {
+		if (movementInDirection > movementBeforeTurn) {
 			direction = -direction;
 			movementInDirection = 0;
 			
-			move.y = -3;
+			move.y = -drop;
+			move.x = 0;
 		}
 		
 		controller.Move(move); 

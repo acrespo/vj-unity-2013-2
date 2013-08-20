@@ -442,6 +442,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alienPrefab: {fileID: 100000, guid: e1e31c63cdcea4e008cc12741c348cde, type: 2}
+  alien1: {fileID: 2800000, guid: 9a85bfd11298c4d0182c70056c656044, type: 3}
+  alien2: {fileID: 2800000, guid: 18fec1eb540b8444ca0572394a3e042e, type: 3}
+  alien3: {fileID: 2800000, guid: 385600a9343f849a9b8c8fae21750112, type: 3}
+  mothership: {fileID: 2800000, guid: 5ffac74f22fd64ba6b9f57907f15b370, type: 3}
+  distanceBetweenAliens: 15
 --- !u!1 &1588428690
 GameObject:
   m_ObjectHideFlags: 0
