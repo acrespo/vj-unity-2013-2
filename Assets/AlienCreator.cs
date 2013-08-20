@@ -15,34 +15,20 @@ public class AlienCreator : MonoBehaviour {
 	
 	public float distanceBetweenAliens = 15;
 	
-	// Use this for initialization
 	void Start () {
+		createAlienLine(alien1, 60);
+		createAlienLine(alien2, 45);
+		createAlienLine(alien2, 30);
+		createAlienLine(alien3, 15);
+		createAlienLine(alien3, 0);
+	}
+	
+	private void createAlienLine(Texture texture, float y) {
 		
 		for (int i = 0; i < 10; i++) {	
-			GameObject alien = (GameObject) GameObject.Instantiate(alienPrefab, new Vector3(distanceBetweenAliens * (i - 5), 60, 300), Quaternion.identity);
-			alien.renderer.material.mainTexture = alien1;
+			GameObject alien = (GameObject) GameObject.Instantiate(alienPrefab, new Vector3(distanceBetweenAliens * (i - 5), y, 300), Quaternion.identity);
+			alien.renderer.material.mainTexture = texture;
 		}
-		
-		for (int i = 0; i < 10; i++) {	
-			GameObject alien = (GameObject) GameObject.Instantiate(alienPrefab, new Vector3(distanceBetweenAliens * (i - 5), 45, 300), Quaternion.identity);
-			alien.renderer.material.mainTexture = alien2;
-		}
-		
-		for (int i = 0; i < 10; i++) {	
-			GameObject alien = (GameObject) GameObject.Instantiate(alienPrefab, new Vector3(distanceBetweenAliens * (i - 5), 30, 300), Quaternion.identity);
-			alien.renderer.material.mainTexture = alien2;
-		}
-		
-		for (int i = 0; i < 10; i++) {	
-			GameObject alien = (GameObject) GameObject.Instantiate(alienPrefab, new Vector3(distanceBetweenAliens * (i - 5), 15, 300), Quaternion.identity);
-			alien.renderer.material.mainTexture = alien3;
-		}
-		
-		for (int i = 0; i < 10; i++) {	
-			GameObject alien = (GameObject) GameObject.Instantiate(alienPrefab, new Vector3(distanceBetweenAliens * (i - 5), 0, 300), Quaternion.identity);
-			alien.renderer.material.mainTexture = alien3;
-		}
-		// Z = 300, Y = 0, X = k * 15
 	}
 
 }
