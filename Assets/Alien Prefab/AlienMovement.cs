@@ -51,6 +51,7 @@ public class AlienMovement : MonoBehaviour {
 			direction = -direction;
 			movementInDirection = 0;
 			
+			// Disable movement in x so that the jump looks less crappy
 			move.y = -drop;
 			move.x = 0;
 		}
