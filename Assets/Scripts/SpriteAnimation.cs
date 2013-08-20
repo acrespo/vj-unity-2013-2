@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(MeshRenderer))]
 public class SpriteAnimation : MonoBehaviour {
-	
-	private MeshFilter filter;
 	
 	public int frames;
 	
@@ -13,7 +12,6 @@ public class SpriteAnimation : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		filter = GetComponent<MeshFilter>();
 		renderer.sharedMaterial.SetTextureScale("_MainTex", new Vector2(0.5f, 1.0f));
 		Animate();
 	}

@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(SpriteAnimation))]
 public class AlienMovement : MonoBehaviour {
 	
 	private CharacterController controller;
 	
 	private SpriteAnimation animator;
-
+	
 	public float movementBeforeTurn = 30;
 	
 	public float delta = 1;
