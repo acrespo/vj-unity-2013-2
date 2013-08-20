@@ -19,7 +19,7 @@ public class Cannon : MonoBehaviour {
 		if (Input.GetKeyDown(KeyCode.Space) && !laser.activeSelf) {
             laser.SetActive(true);
 			
-			laser.transform.position = transform.position;
+			laser.transform.position = transform.position + Vector3.up * 100;
 			laser.rigidbody.AddForce(Vector3.up * 1000);
         }
 	}

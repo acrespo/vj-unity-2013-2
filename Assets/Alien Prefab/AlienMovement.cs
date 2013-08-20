@@ -1,11 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-[RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(SpriteAnimation))]
 public class AlienMovement : MonoBehaviour {
-	
-	private CharacterController controller;
 	
 	private SpriteAnimation animator;
 	
@@ -25,7 +22,6 @@ public class AlienMovement : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		controller = GetComponent<CharacterController>();
 		animator = GetComponent<SpriteAnimation>();
 		
 		// Start in the center of the movement area
@@ -56,7 +52,7 @@ public class AlienMovement : MonoBehaviour {
 			move.x = 0;
 		}
 		
-		controller.Move(move); 
+		transform.position += move;
 	}
 	
 }
