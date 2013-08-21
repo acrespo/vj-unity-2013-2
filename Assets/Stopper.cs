@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KillMe : MonoBehaviour {
-	
+public class Stopper : MonoBehaviour {
+
 	void OnTriggerEnter (Collider collider) {
-		GameObject.Destroy(gameObject);
+		gameObject.SetActive(false);
 	}
 }
