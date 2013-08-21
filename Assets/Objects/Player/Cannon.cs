@@ -20,7 +20,7 @@ public class Cannon : MonoBehaviour {
             laser.SetActive(true);
 			
 			laser.transform.position = transform.position + Vector3.up * 7;
-			laser.rigidbody.AddForce(Vector3.up * 1000);
+			laser.rigidbody.AddForce(Vector3.up * 10, ForceMode.VelocityChange);
         }
 	}
 }
