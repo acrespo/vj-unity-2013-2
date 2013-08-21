@@ -300,7 +300,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 645d203acf2654d6aa7ecdd6037fb67b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -90
+      value: -60
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 645d203acf2654d6aa7ecdd6037fb67b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -467,7 +467,7 @@ Transform:
   m_PrefabInternal: {fileID: 190169607}
   m_GameObject: {fileID: 321424243}
   m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
-  m_LocalPosition: {x: 0, y: -90, z: 300}
+  m_LocalPosition: {x: 0, y: -60, z: 300}
   m_LocalScale: {x: 1, y: 0, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -493,6 +493,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1270640724}
   - 114: {fileID: 1270640725}
+  - 114: {fileID: 1270640726}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -523,11 +524,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alienPrefab: {fileID: 100000, guid: e1e31c63cdcea4e008cc12741c348cde, type: 2}
-  alien1: {fileID: 2800000, guid: 9a85bfd11298c4d0182c70056c656044, type: 3}
-  alien2: {fileID: 2800000, guid: 18fec1eb540b8444ca0572394a3e042e, type: 3}
-  alien3: {fileID: 2800000, guid: 385600a9343f849a9b8c8fae21750112, type: 3}
-  mothership: {fileID: 2800000, guid: 5ffac74f22fd64ba6b9f57907f15b370, type: 3}
+  alien1:
+    texture: {fileID: 2800000, guid: 9a85bfd11298c4d0182c70056c656044, type: 3}
+    score: 40
+  alien2:
+    texture: {fileID: 2800000, guid: 18fec1eb540b8444ca0572394a3e042e, type: 3}
+    score: 30
+  alien3:
+    texture: {fileID: 2800000, guid: 385600a9343f849a9b8c8fae21750112, type: 3}
+    score: 20
+  mothership:
+    texture: {fileID: 0}
+    score: 0
   distanceBetweenAliens: 15
+--- !u!114 &1270640726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1270640723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fce5fccfb8f941498e6ccd2cef7d124, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1588428690
 GameObject:
   m_ObjectHideFlags: 0
