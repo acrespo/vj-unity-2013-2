@@ -7,6 +7,6 @@ public class KillMe : MonoBehaviour {
 	
 	void OnTriggerEnter (Collider collider) {
 		GameObject.Destroy(gameObject);
-		ScoreKeeper.Instance.addScore(score);
+		ScoreKeeper.Instance.alienDied(score);
 	}
 }
