@@ -80,6 +80,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e936ea850dfe4c9c876762676479760, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -91,9 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 480ae01219e214a02b46d87e2a3652c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementBeforeTurn: 15
+  movementBeforeTurn: 20
   delta: 2
-  drop: 5
+  drop: 4
   updatesTillMove: 30
 --- !u!114 &11400004
 MonoBehaviour:
