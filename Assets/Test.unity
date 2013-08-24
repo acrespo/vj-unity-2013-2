@@ -354,6 +354,7 @@ GameObject:
   - 114: {fileID: 321424245}
   - 114: {fileID: 321424244}
   - 114: {fileID: 321424250}
+  - 114: {fileID: 321424251}
   m_Layer: 9
   m_Name: Player
   m_TagString: Untagged
@@ -497,6 +498,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserPrefab: {fileID: 100000, guid: 6f6d226c67e3f4b1e95853db0d08d8b2, type: 2}
+--- !u!114 &321424251
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 321424243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23bf3d5b99124666a4c770ead97c872, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 0
 --- !u!1 &583137937
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,6 +667,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skin: {fileID: 11400000, guid: fe87d98cd0ed3416fa7e5d738911c526, type: 2}
+  playerTexture: {fileID: 2800000, guid: 6410dca39d53043979eebf2ebad74faf, type: 3}
 --- !u!1 &1588428690
 GameObject:
   m_ObjectHideFlags: 0

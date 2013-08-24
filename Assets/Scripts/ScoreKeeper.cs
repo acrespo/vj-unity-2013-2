@@ -7,9 +7,23 @@ public class ScoreKeeper : Singleton<ScoreKeeper> {
 	
 	private int aliens = 0;
 	
+	private int lives = 3;
+	
+	public void Reset() {
+		score = 0;
+		aliens = 0;
+		lives = 3;
+	}
+	
 	public int Score {
 		get {
 			return score;
+		}
+	}
+	
+	public int Lives {
+		get {
+			return lives;
 		}
 	}
 	
@@ -27,6 +41,10 @@ public class ScoreKeeper : Singleton<ScoreKeeper> {
 	public void alienDied(int score) {
 		this.score += +score;
 		aliens--;
+	}
+	
+	public void playerDied() {
+		lives--;
 	}
 	
 }
