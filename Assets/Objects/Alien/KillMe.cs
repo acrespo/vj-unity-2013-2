@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class KillMe : MonoBehaviour {
+public class KillMe : Shootable {
 	
 	public int score;
 	
-	void OnTriggerEnter (Collider collider) {
+	public override void Hit () {
 		GameObject.Destroy(gameObject);
 		ScoreKeeper.Instance.alienDied(score);
 	}

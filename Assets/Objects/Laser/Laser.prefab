@@ -12,8 +12,8 @@ GameObject:
   - 23: {fileID: 2300000}
   - 65: {fileID: 6500000}
   - 54: {fileID: 5400000}
-  - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
+  - 114: {fileID: 11400000}
   m_Layer: 0
   m_Name: Laser
   m_TagString: Untagged
@@ -92,9 +92,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 100000}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddd9dfa7b34854df0a76a39f5f3bdf38, type: 3}
+  m_Script: {fileID: 11500000, guid: c60089618d86f47bda5a39bacfab193d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 0
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

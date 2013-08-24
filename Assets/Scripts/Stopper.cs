@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Stopper : MonoBehaviour {
-
-	void OnTriggerEnter (Collider collider) {
-		gameObject.SetActive(false);
+public class Stopper : Shootable {
+	
+	public override void Hit () {
+		// I AM IMMORTAL
 	}
 }
