@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: 746e1c56d0be9f646a253867d6006508
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences:
+  - bunkerPrefab: {fileID: 100000, guid: 4996f8e3e92afaa4e89ecd4df4261bff, type: 2}
+  - bunkerTexture: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 

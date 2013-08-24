@@ -12,7 +12,6 @@ public class SpriteAnimation : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		renderer.sharedMaterial.SetTextureScale("_MainTex", new Vector2(0.5f, 1.0f));
 		Animate();
 	}
 	

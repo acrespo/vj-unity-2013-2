@@ -98,7 +98,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 19077654}
-  m_LocalRotation: {x: -.707106829, y: 0, z: 0, w: .707106709}
+  m_LocalRotation: {x: -.707106888, y: 0, z: 0, w: .707106769}
   m_LocalPosition: {x: 0, y: 0, z: 1000}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_Children: []
@@ -601,6 +601,7 @@ GameObject:
   - 114: {fileID: 1270640725}
   - 114: {fileID: 1270640726}
   - 114: {fileID: 1270640727}
+  - 114: {fileID: 1270640728}
   m_Layer: 0
   m_Name: SceneManager
   m_TagString: Untagged
@@ -668,6 +669,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skin: {fileID: 11400000, guid: fe87d98cd0ed3416fa7e5d738911c526, type: 2}
   playerTexture: {fileID: 2800000, guid: 6410dca39d53043979eebf2ebad74faf, type: 3}
+--- !u!114 &1270640728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1270640723}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 746e1c56d0be9f646a253867d6006508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bunkerPrefab: {fileID: 100000, guid: 1a6ccd48d9e5b074f83c62ebfc39ffdd, type: 2}
+  bunkerTexture: {fileID: 2800000, guid: 369e020652528244f85067bc2ff8b66b, type: 3}
+  distanceBetweenBunkers: 50
 --- !u!1 &1588428690
 GameObject:
   m_ObjectHideFlags: 0
