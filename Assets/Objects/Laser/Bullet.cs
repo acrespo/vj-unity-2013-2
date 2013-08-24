@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour {
 	void OnTriggerEnter(Collider collider) {
 		
 		Shootable imp = collider.gameObject.GetComponent<Shootable>();
-		if (imp && imp.team != team) {
+		if (imp && imp.enabled && imp.team != team) {
 			imp.Hit();
 			GameObject.Destroy(gameObject);
 		}

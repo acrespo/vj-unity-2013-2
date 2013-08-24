@@ -7,7 +7,9 @@ public class ThreeHits : Shootable
 		ScoreKeeper.Instance.playerDied();
 		
 		if (ScoreKeeper.Instance.Lives == 0) {
-			GetComponent<CharacterMotor>().canControl = false;
+			enabled = false;
+			GetComponent<CharacterMotor>().enabled = false;
+			GetComponent<Cannon>().enabled = false;
 		}
 	}
 }

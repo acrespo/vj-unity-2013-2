@@ -16,7 +16,7 @@ public class Overlay : MonoBehaviour {
 		
 		int playerLives = ScoreKeeper.Instance.Lives;
 		if (playerLives == 0) {
-			GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 30, 200, 60), "YOU  LOST :(", skin.customStyles[0]);
+			GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 30, 200, 60), "YOU   LOST :(", skin.customStyles[0]);
 		}
 		
 		for (int i = 0; i < playerLives; i++) {
