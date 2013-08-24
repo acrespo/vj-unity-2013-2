@@ -5,6 +5,10 @@ public class ThreeHits : Shootable
 {
 	public override void Hit () {
 		ScoreKeeper.Instance.playerDied();
+		
+		if (ScoreKeeper.Instance.Lives == 0) {
+			GetComponent<CharacterMotor>().canControl = false;
+		}
 	}
 }
 
