@@ -8,5 +8,6 @@ public class KillMe : Shootable {
 	public override void Hit () {
 		GameObject.Destroy(gameObject);
 		ScoreKeeper.Instance.alienDied(score);
+		SoundManager.Instance.Play(SoundManager.Instance.alienExplosion);
 	}
 }

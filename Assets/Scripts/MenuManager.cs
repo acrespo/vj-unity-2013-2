@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class MenuManagerBehavior : MonoBehaviour
+public class MenuManager : MonoBehaviour
 {
 	public GUISkin skin;
 	public Texture2D background;

@@ -53,6 +53,15 @@ public class AlienMovement : MonoBehaviour {
 		}
 		
 		transform.position += move;
+		
+		AudioSource invader = SoundManager.Instance.invader;
+		if(!invader.isPlaying){
+			SoundManager.Instance.Play(invader);
+			invader.pitch -= 0.1f;
+			if (invader.pitch < 0.65f) {
+				invader.pitch = 1.0f;
+			}
+		}
 	}
 	
 }

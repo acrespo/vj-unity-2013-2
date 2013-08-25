@@ -83,6 +83,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 1
   score: 0
+  deadSound: {fileID: 8300000, guid: affa5b28a9554ad42b1f54bc4c91a0c3, type: 3}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -98,6 +99,7 @@ MonoBehaviour:
   delta: 2
   drop: 4
   updatesTillMove: 30
+  moveSound: {fileID: 8300000, guid: 4196c7c9e1a04ff4ea42ee20b52e8619, type: 3}
 --- !u!114 &11400004
 MonoBehaviour:
   m_ObjectHideFlags: 1

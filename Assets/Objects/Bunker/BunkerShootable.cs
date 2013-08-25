@@ -20,5 +20,6 @@ public class BunkerShootable : Shootable {
 		} else {
 			GameObject.Destroy(gameObject);
 		}
+		SoundManager.Instance.Play (SoundManager.Instance.hit);
 	}
 }

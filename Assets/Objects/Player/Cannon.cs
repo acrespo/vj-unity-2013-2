@@ -17,6 +17,8 @@ public class Cannon : MonoBehaviour {
 			Vector3 pos = transform.position + Vector3.up * 7;
 			pos.z = 300;
 			laser.transform.position = pos;
+			
+			SoundManager.Instance.Play(SoundManager.Instance.playerShoot);
         }
 	}
 }

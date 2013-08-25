@@ -10,6 +10,9 @@ public class ThreeHits : Shootable
 			enabled = false;
 			GetComponent<CharacterMotor>().enabled = false;
 			GetComponent<Cannon>().enabled = false;
+			SoundManager.Instance.Play(SoundManager.Instance.playerExplosion);
+		}else{
+			SoundManager.Instance.Play(SoundManager.Instance.playerHit);
 		}
 	}
 }
