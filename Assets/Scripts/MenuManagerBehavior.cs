@@ -42,16 +42,6 @@ public class MenuManagerBehavior : MonoBehaviour
 	
 	private void ShowOptions ()
 	{
-		/*GUILayout.BeginArea (new Rect (Screen.width / 2 - 100, Screen.height / 2, 200, 200));
-		GUILayout.Label ("== Options ==", skin.customStyles[1]);
-		bool useSound = PlayerPrefs.GetInt ("sound", 1) == 1;
-		useSound = GUILayout.Toggle (useSound, "Sound effects", skin.customStyles[1]);
-		PlayerPrefs.SetInt ("sound", useSound ? 1 : 0);
-		if (GUILayout.Button ("Back")) {
-			state = "main";	
-		}
-		GUILayout.EndArea ();*/
-		
 		GUI.Label (new Rect (Screen.width / 2 - 52, Screen.height / 2, 104, 20), "== Options ==");
 		
 		bool useSound = PlayerPrefs.GetInt ("sound", 1) == 1;
@@ -65,16 +55,6 @@ public class MenuManagerBehavior : MonoBehaviour
 	
 	private void ShowCredits ()
 	{
-		/*GUILayout.BeginArea (new Rect (Screen.width / 2 - 100, Screen.height / 2, 200, 200));
-		GUILayout.Label ("== Credits ==", skin.customStyles [1]);
-		GUILayout.Label ("Juan Civile", skin.customStyles [1]);
-		GUILayout.Label ("Alvaro Crespo", skin.customStyles [1]);
-		GUILayout.Label ("Frederic Schertenleib", skin.customStyles [1]);
-		if (GUILayout.Button ("Back")) {
-			state = "main";	
-		}
-		GUILayout.EndArea ();*/
-			
 		GUI.Label (new Rect (Screen.width / 2 - 52, Screen.height / 2, 104, 20), "== Credits ==");
 		
 		GUI.Label (new Rect (Screen.width / 2 - 48, Screen.height / 2 + 40, 96, 20), "Juan Civile");
