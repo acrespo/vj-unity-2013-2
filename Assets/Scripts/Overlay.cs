@@ -13,7 +13,6 @@ public class Overlay : MonoBehaviour {
 		overlayTexture = new Texture2D(1, 1);
 		Color pixelColor = new Color(0f, 0f, 0f, 0.3f);
 		overlayTexture.SetPixel(0, 0, pixelColor);
-		overlayTexture.alphaIsTransparency = true;
 		overlayTexture.Apply();
 	}
 	
