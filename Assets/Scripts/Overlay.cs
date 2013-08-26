@@ -20,7 +20,7 @@ public class Overlay : MonoBehaviour {
 		GUI.Label(new Rect(10, 0, 100, 20), "Score:  " + ScoreKeeper.Instance.Score.ToString(), skin.label);
 		
 		int playerLives = ScoreKeeper.Instance.Lives;
-		bool gameOver = ScoreKeeper.Instance.AliensLeft == 0 || playerLives == 0;
+		bool gameOver = ScoreKeeper.Instance.AliensLeft == 0 || playerLives == -1;
 		
 		for (int i = 0; i < playerLives; i++) {
 			
@@ -35,7 +35,7 @@ public class Overlay : MonoBehaviour {
 				GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 60, 200, 60), "YOU  WIN!", skin.customStyles[0]);
 			}
 			
-			if (playerLives == 0) {
+			if (playerLives == -1) {
 				GUI.Label(new Rect(Screen.width / 2 - 100, Screen.height / 2 - 60, 200, 60), "YOU   LOST :(", skin.customStyles[0]);	
 			}
 			

@@ -123,9 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laserPrefab: {fileID: 100000, guid: 6f6d226c67e3f4b1e95853db0d08d8b2, type: 2}
-  chance: .00100000005
-  minWait: 5
-  maxWait: 10
+  chance: .100000001
   layer:
     serializedVersion: 2
     m_Bits: 256
