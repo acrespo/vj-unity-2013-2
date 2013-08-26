@@ -5,9 +5,7 @@ public class CrazyAlienCannon : MonoBehaviour {
 	
 	public GameObject laserPrefab;
 	
-	public float minWait;
-	
-	public float maxWait;
+	public float chance;
 	
 	public LayerMask layer;
 	
@@ -18,9 +16,9 @@ public class CrazyAlienCannon : MonoBehaviour {
 	IEnumerator RandomShoot() {
 		
 		while (gameObject.activeSelf) {
-			yield return new WaitForSeconds(Random.Range(minWait, maxWait));
+			yield return new WaitForSeconds(1);
 			
-			if (!Physics.Raycast(transform.position, Vector3.down, layer)) {
+			if (!Physics.Raycast(transform.position, Vector3.down, layer) && Random.value < chance) {
 				// Shoot!
 				GameObject laser = (GameObject) GameObject.Instantiate(laserPrefab, transform.position, Quaternion.identity);
 				Vector3 pos = laser.transform.position;
