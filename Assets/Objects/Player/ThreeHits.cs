@@ -1,6 +1,8 @@
 using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(CharacterMotor))]
+[RequireComponent(typeof(Cannon))]
 public class ThreeHits : Shootable
 {
 	public override void Hit () {
