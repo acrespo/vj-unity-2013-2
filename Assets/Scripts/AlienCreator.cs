@@ -17,11 +17,11 @@ public class AlienCreator : MonoBehaviour {
 	public float distanceBetweenAliens = 15;
 	
 	void Start () {
-		createAlienLine(alien1, 60);
-		createAlienLine(alien2, 45);
-		createAlienLine(alien2, 30);
-		createAlienLine(alien3, 15);
-		createAlienLine(alien3, 0);
+		createAlienLine(alien1, 70);
+		createAlienLine(alien2, 55);
+		createAlienLine(alien2, 40);
+		createAlienLine(alien3, 25);
+		createAlienLine(alien3, 10);
 		
 	}
 	
