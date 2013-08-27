@@ -12,7 +12,9 @@ public class MotherShipMovement : MonoBehaviour {
 	public int updatesTillMove = 1;
 	
 	public float chance = 0.03f;
-		
+
+	public int height = 80;
+
 	// Use this for initialization
 	void Start () {
 		StartCoroutine("MotherShipAppearance");
@@ -29,10 +31,10 @@ public class MotherShipMovement : MonoBehaviour {
 			if (!renderer.enabled) {
 				if (Random.value >= 0.5) {
 					direction = 1;
-					transform.position = new Vector3(-84, 60, 400);
+					transform.position = new Vector3(-84, height, 400);
 				} else {
 					direction = -1;
-					transform.position = new Vector3(84, 60, 400);
+					transform.position = new Vector3(84, height, 400);
 				}
 				renderer.enabled = true;
 			}
@@ -54,9 +56,13 @@ public class MotherShipMovement : MonoBehaviour {
 			transform.position += move;
 		}
 	}
-	
+
 	void OnTriggerEnter(Collider collider) {
+		Disappear();
+	}
+
+	public void Disappear() {
 		renderer.enabled = false;
-		transform.position = new Vector3(-110, 60, 400);
+		transform.position = new Vector3(-110, height, 400);
 	}
 }
