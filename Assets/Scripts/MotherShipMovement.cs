@@ -11,9 +11,7 @@ public class MotherShipMovement : MonoBehaviour {
 	
 	public int updatesTillMove = 1;
 	
-	public float minWait;
-	
-	public float maxWait;
+	public float chance = 0.03f;
 		
 	// Use this for initialization
 	void Start () {
@@ -22,9 +20,13 @@ public class MotherShipMovement : MonoBehaviour {
 	
 	IEnumerator MotherShipAppearance() {
 		while (gameObject.activeSelf) {
-			yield return new WaitForSeconds(Random.Range(minWait, maxWait));
+			yield return new WaitForSeconds(1);
+			
+			if (Random.value > chance) {
+				continue;
+			}
 
-			if (!GetComponent<MeshRenderer>().enabled) {
+			if (!renderer.enabled) {
 				if (Random.value >= 0.5) {
 					direction = 1;
 					transform.position = new Vector3(-84, 60, 400);
@@ -32,7 +34,7 @@ public class MotherShipMovement : MonoBehaviour {
 					direction = -1;
 					transform.position = new Vector3(84, 60, 400);
 				}
-				GetComponent<MeshRenderer>().enabled = true;
+				renderer.enabled = true;
 			}
 		}
 	}
@@ -52,6 +54,6 @@ public class MotherShipMovement : MonoBehaviour {
 	}
 	
 	void OnTriggerEnter(Collider collider) {
-		GetComponent<MeshRenderer>().enabled = false;
+		renderer.enabled = false;
 	}
 }
