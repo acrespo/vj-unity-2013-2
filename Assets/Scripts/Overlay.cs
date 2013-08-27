@@ -20,7 +20,8 @@ public class Overlay : MonoBehaviour {
 		GUI.Label(new Rect(10, 0, 100, 20), "Score:  " + ScoreKeeper.Instance.Score.ToString(), skin.label);
 		
 		int playerLives = ScoreKeeper.Instance.Lives;
-		bool gameOver = ScoreKeeper.Instance.AliensLeft == 0 || playerLives == -1;
+		bool aliensReachedPlayer = ScoreKeeper.Instance.AliensReachedPlayer;
+		bool gameOver = ScoreKeeper.Instance.AliensLeft == 0 || playerLives == -1 || aliensReachedPlayer;
 		
 		for (int i = 0; i < playerLives; i++) {
 			

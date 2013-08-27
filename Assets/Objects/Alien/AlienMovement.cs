@@ -62,6 +62,10 @@ public class AlienMovement : MonoBehaviour {
 				invader.pitch = 1.0f;
 			}
 		}
+
+		if (transform.position.y <= -60 ) {
+			ScoreKeeper.Instance.AliensReachedPlayer = true;
+		}
 	}
 	
 }
