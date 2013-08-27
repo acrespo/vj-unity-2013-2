@@ -42,15 +42,17 @@ public class MotherShipMovement : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 		
-		if (updatesElapsed < updatesTillMove) {
-			updatesElapsed++;
-			return;
-		} else {
-			updatesElapsed = 0;
+		if (renderer.enabled) {
+			if (updatesElapsed < updatesTillMove) {
+				updatesElapsed++;
+				return;
+			} else {
+				updatesElapsed = 0;
+			}
+
+			Vector3 move = new Vector3(delta * direction, 0, 0);
+			transform.position += move;
 		}
-				
-		Vector3 move = new Vector3(delta * direction, 0, 0);
-		transform.position += move;
 	}
 	
 	void OnTriggerEnter(Collider collider) {
