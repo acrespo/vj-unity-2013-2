@@ -381,7 +381,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delta: 1
-  updatesTillMove: 0
+  updatesTillMove: 1
   chance: .0299999993
   height: 80
 --- !u!54 &294804563
