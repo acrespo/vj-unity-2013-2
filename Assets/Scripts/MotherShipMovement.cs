@@ -57,5 +57,6 @@ public class MotherShipMovement : MonoBehaviour {
 	
 	void OnTriggerEnter(Collider collider) {
 		renderer.enabled = false;
+		transform.position = new Vector3(-110, 60, 400);
 	}
 }
