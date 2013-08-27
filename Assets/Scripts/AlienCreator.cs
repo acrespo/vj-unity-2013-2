@@ -28,7 +28,7 @@ public class AlienCreator : MonoBehaviour {
 	private void createAlienLine(AlienData data, float y) {
 		
 		for (int i = 0; i < 10; i++) {	
-			GameObject alien = (GameObject) GameObject.Instantiate(alienPrefab, new Vector3(distanceBetweenAliens * (i - 5), y, 300), Quaternion.identity);
+			GameObject alien = (GameObject) GameObject.Instantiate(alienPrefab, new Vector3(distanceBetweenAliens * (i - 5), y, 400), Quaternion.identity);
 			alien.renderer.material.mainTexture = data.texture;
 			alien.GetComponent<KillMe>().score = data.score;
 			

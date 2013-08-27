@@ -15,7 +15,7 @@ public class Cannon : MonoBehaviour {
 			laser.GetComponent<Bullet>().team = Team.Player;
 			
 			Vector3 pos = transform.position + Vector3.up * 7;
-			pos.z = 300;
+			pos.z = 400;
 			laser.transform.position = pos;
 			
 			SoundManager.Instance.Play(SoundManager.Instance.playerShoot);
