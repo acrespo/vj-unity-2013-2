@@ -382,8 +382,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   delta: 1
   updatesTillMove: 1
-  chance: .0299999993
-  height: 80
+  chance: .100000001
+  height: 83
 --- !u!54 &294804563
 Rigidbody:
   m_ObjectHideFlags: 0
