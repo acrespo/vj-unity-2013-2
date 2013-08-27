@@ -17,8 +17,7 @@ public class CrazyAlienCannon : MonoBehaviour {
 		
 		while (gameObject.activeSelf) {
 			yield return new WaitForSeconds(1);
-			
-			if (!Physics.Raycast(transform.position, Vector3.down, layer) && Random.value < chance) {
+			if (!Physics.Raycast(transform.position, Vector3.down, 2000f, layer) && Random.value < chance) {
 				// Shoot!
 				GameObject laser = (GameObject) GameObject.Instantiate(laserPrefab, transform.position, Quaternion.identity);
 				Vector3 pos = laser.transform.position;
