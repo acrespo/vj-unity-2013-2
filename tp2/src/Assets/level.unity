@@ -103,6 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mapBlock: {fileID: 100000, guid: 3b45d29efbb3f4f94a1d1fff4607809f, type: 2}
+  unkillable: {fileID: 100000, guid: 0717045c7c0124d44bf741f05fdd3b4a, type: 2}
   tank: {fileID: 100000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
   firstLevel: {fileID: 4900000, guid: 253ca9cbe6e3e4e349817047b751e179, type: 3}
 --- !u!4 &669536594
