@@ -14,7 +14,10 @@ public class Cannon : MonoBehaviour {
 			GameObject bullet = (GameObject) GameObject.Instantiate(bulletPrefab);
 			
 			bullet.GetComponent<Bullet>().team = Team.Player;
-			bullet.GetComponent<ConstantSpeed>().speed = transform.forward * 5;
+			
+			Vector3 speed =  transform.forward * 5;
+			speed.y = 0;
+			bullet.GetComponent<ConstantSpeed>().speed = speed;
 			
 			Vector3 pos = transform.position + transform.forward;
 			bullet.transform.position = pos;
