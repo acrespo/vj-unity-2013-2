@@ -30,6 +30,7 @@ public class World : MonoBehaviour {
 			} else if (c == 'P') {
 				GameObject tankObj = Instantiate(tank) as GameObject;
 				tankObj.transform.position = new Vector3(i, 0.51f, j);
+				tankObj.transform.parent = transform;
 			}
 			
 			i++;
@@ -54,5 +55,6 @@ public class World : MonoBehaviour {
 	private void addBlock(int x, int z) {
 		GameObject block = Instantiate(mapBlock) as GameObject;
 		block.transform.position = new Vector3(x, 0.51f, z);
+		block.transform.parent = transform;
 	}
 }

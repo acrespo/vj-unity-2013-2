@@ -15,13 +15,14 @@ public class Cannon : MonoBehaviour {
 			
 			bullet.GetComponent<Bullet>().team = Team.Player;
 			
-			Vector3 speed =  transform.forward * 5;
+			Vector3 speed =  transform.forward * 10;
 			speed.y = 0;
 			bullet.GetComponent<ConstantSpeed>().speed = speed;
 			
 			Vector3 pos = transform.position + transform.forward;
 			bullet.transform.position = pos;
 			bullet.transform.forward = transform.forward;
+			bullet.transform.parent = transform.parent;
 			
 			SoundManager.Instance.Play(shootSound);
         }
