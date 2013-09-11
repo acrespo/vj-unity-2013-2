@@ -4,6 +4,8 @@ using System.Collections;
 public class World : MonoBehaviour {
 	
 	public GameObject mapBlock;
+	
+	private bool paused = false;
 
 	// Use this for initialization
 	void Start () {
@@ -12,6 +14,19 @@ public class World : MonoBehaviour {
 		}
 	}
 	
+	void Update () {
+
+		if (Input.GetKeyDown(KeyCode.Escape)) {
+
+			if (paused) {
+				Time.timeScale = 1;
+			} else {
+				Time.timeScale = 0;
+			}
+
+			paused = !paused;
+		}
+	}
 	
 	private void addBlock(int x, int z) {
 		GameObject block = (GameObject) GameObject.Instantiate(mapBlock);

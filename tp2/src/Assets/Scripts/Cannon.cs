@@ -8,7 +8,7 @@ public class Cannon : MonoBehaviour {
 	public AudioSource shootSound;
 	
 	// Update is called once per frame
-	void Update () {
+	void FixedUpdate () {
 		
 		if (Input.GetKeyDown(KeyCode.Space)) {
 			GameObject bullet = (GameObject) GameObject.Instantiate(bulletPrefab);
