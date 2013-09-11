@@ -74,6 +74,140 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
+--- !u!1001 &813658618
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 400000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: .417644888
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -4.4056325
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 400000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+      propertyPath: m_Name
+      value: Player tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 6500000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+  m_RootGameObject: {fileID: 1081307443}
+  m_IsPrefabParent: 0
+  m_IsExploded: 1
+--- !u!1 &1081307443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 100000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+  m_PrefabInternal: {fileID: 813658618}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1081307447}
+  - 33: {fileID: 1081307446}
+  - 23: {fileID: 1081307444}
+  - 54: {fileID: 1081307448}
+  - 65: {fileID: 1081307445}
+  m_Layer: 0
+  m_Name: Player tank
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!23 &1081307444
+Renderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 2300000, guid: 6b221d89102e14dca9167e419ad2a53c,
+    type: 2}
+  m_PrefabInternal: {fileID: 813658618}
+  m_GameObject: {fileID: 1081307443}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_LightmapIndex: 255
+  m_LightmapTilingOffset: {x: 1, y: 1, z: 0, w: 0}
+  m_Materials:
+  - {fileID: 10302, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_LightProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+--- !u!65 &1081307445
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 6500000, guid: 6b221d89102e14dca9167e419ad2a53c,
+    type: 2}
+  m_PrefabInternal: {fileID: 813658618}
+  m_GameObject: {fileID: 1081307443}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &1081307446
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 3300000, guid: 6b221d89102e14dca9167e419ad2a53c,
+    type: 2}
+  m_PrefabInternal: {fileID: 813658618}
+  m_GameObject: {fileID: 1081307443}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1081307447
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 400000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+  m_PrefabInternal: {fileID: 813658618}
+  m_GameObject: {fileID: 1081307443}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .417644888, y: 10, z: -4.4056325}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!54 &1081307448
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400000, guid: 6b221d89102e14dca9167e419ad2a53c,
+    type: 2}
+  m_PrefabInternal: {fileID: 813658618}
+  m_GameObject: {fileID: 1081307443}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1001 &1321797356
 Prefab:
   m_ObjectHideFlags: 0
@@ -129,6 +263,7 @@ GameObject:
   - 33: {fileID: 1447110311}
   - 23: {fileID: 1447110312}
   - 64: {fileID: 1447110313}
+  - 54: {fileID: 1447110314}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -186,8 +321,24 @@ MeshCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_SmoothSphereCollisions: 0
-  m_Convex: 0
+  m_Convex: 1
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!54 &1447110314
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 5400000, guid: fcc1d8680337b4df9b2bd43005cd67b4,
+    type: 2}
+  m_PrefabInternal: {fileID: 1321797356}
+  m_GameObject: {fileID: 1447110309}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: .0500000007
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &2051255039
 GameObject:
   m_ObjectHideFlags: 0
