@@ -11,16 +11,27 @@ public class World : MonoBehaviour {
 	
 	private bool paused = false;
 	
+	private int currentLevel;
+	
 	private EnemyManager enemyManager;
 
 	// Use this for initialization
 	void Start () {
 		enemyManager = new EnemyManager(transform, () => loadNextLevel());
-		loadLevel ("Assets/Levels/first.txt");
+		
+		currentLevel = 0;
+		loadNextLevel();
 	}
 	
 	void loadNextLevel() {
-		loadLevel("Assets/Levels/first.txt");
+		currentLevel++;
+		
+		string fileName = "Assets/Levels/" + currentLevel + ".txt";
+		if (File.Exists(fileName)) {
+			loadLevel(fileName);
+		} else {
+			Debug.Log ("YOU WIN");
+		}
 	}
 
 	void loadLevel (string fileName)
