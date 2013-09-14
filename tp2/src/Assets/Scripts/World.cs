@@ -40,6 +40,8 @@ public class World : MonoBehaviour {
 				GameObject tankObj = Instantiate(tank) as GameObject;
 				tankObj.transform.position = new Vector3(i, 0.51f, j);
 				tankObj.transform.parent = transform;
+			} else if (c == 'M') {
+				addBlock(unkillable, i, j);
 			}
 			
 			i++;
