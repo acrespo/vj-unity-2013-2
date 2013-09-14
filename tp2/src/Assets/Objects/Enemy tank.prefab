@@ -70,7 +70,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab79d7f243824f5d9826bd83522c8df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canControl: 0
+  canControl: 1
   useFixedUpdate: 1
   movement:
     maxForwardSpeed: 5
@@ -107,7 +107,7 @@ MonoBehaviour:
     perpAmount: 0
     steepPerpAmount: .5
   movingPlatform:
-    enabled: 1
+    enabled: 0
     movementTransfer: 2
   sliding:
     enabled: 0
@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a0f1748a27349e2bbf5d98f2f0ca68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  timeBetweenMoves: 1
 --- !u!143 &14300000
 CharacterController:
   m_ObjectHideFlags: 1
