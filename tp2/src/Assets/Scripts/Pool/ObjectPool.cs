@@ -21,10 +21,10 @@ public class ObjectPool : Singleton<ObjectPool>
 	
 	public void Return(GameObject obj) {
 		
-		if (gameObject.GetComponent<Poolable>()) {	
+		if (gameObject.GetComponent<Poolable>()) {
 			pools[obj.GetComponent<Poolable>().poolId].Return(obj);
 		} else {
-			GameObject.Destroy(gameObject);
+			GameObject.Destroy(obj);
 		}
 	}
 	
