@@ -16,7 +16,6 @@ public class World : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
 		loadLevel ("Assets/Levels/first.txt");
 	}
 

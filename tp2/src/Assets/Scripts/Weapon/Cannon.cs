@@ -10,7 +10,7 @@ public abstract class Cannon : MonoBehaviour {
 	public AudioSource shootSound;
 	
 	protected void Shoot() {
-		GameObject bullet = (GameObject) GameObject.Instantiate(bulletPrefab);
+		GameObject bullet = ObjectPool.Instance.GetObject("Bullet");
 		
 		bullet.GetComponent<Bullet>().team = team;
 		
