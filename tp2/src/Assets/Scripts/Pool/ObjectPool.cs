@@ -20,7 +20,12 @@ public class ObjectPool : Singleton<ObjectPool>
 	}
 	
 	public void Return(GameObject obj) {
-		pools[obj.GetComponent<Poolable>().poolId].Return(obj);
+		
+		if (gameObject.GetComponent<Poolable>()) {	
+			pools[obj.GetComponent<Poolable>().poolId].Return(obj);
+		} else {
+			GameObject.Destroy(gameObject);
+		}
 	}
 	
 	[Serializable]
@@ -45,7 +50,6 @@ public class ObjectPool : Singleton<ObjectPool>
 			this.config = config;
 			
 			name = config.prefab.GetComponent<Poolable>().poolId;
-			
 			for (int i = 0; i < config.startCount; i++) {
 				Return(GameObject.Instantiate(config.prefab) as GameObject);
 			}

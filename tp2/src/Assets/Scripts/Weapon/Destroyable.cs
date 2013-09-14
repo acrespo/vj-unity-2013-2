@@ -6,7 +6,9 @@ public class Destroyable : Shootable {
 	public AudioSource sound;
 	
 	public override void Hit () {
-		GameObject.Destroy(gameObject);
+		
+		ObjectPool.Instance.Return(gameObject);
+		
 		if (sound) {
 			SoundManager.Instance.Play(sound);
 		}

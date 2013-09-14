@@ -60,13 +60,9 @@ public class World : MonoBehaviour {
 	}
 
 	void clearLevel() {
+		
 		foreach (Transform child in transform) {
-			
-			if (child.GetComponent<Poolable>()) {
-				ObjectPool.Instance.Return(child.gameObject);
-			} else {
-				GameObject.Destroy(child.gameObject);
-			}
+			ObjectPool.Instance.Return(child.gameObject);
 		}
 	}
 	
