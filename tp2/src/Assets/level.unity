@@ -143,6 +143,12 @@ MonoBehaviour:
   - prefab: {fileID: 100000, guid: cc3a679b102b04ccfaa321b225abbc73, type: 2}
     poolLimit: 30
     startCount: 10
+  - prefab: {fileID: 100000, guid: 3b45d29efbb3f4f94a1d1fff4607809f, type: 2}
+    poolLimit: 200
+    startCount: 20
+  - prefab: {fileID: 100000, guid: 0717045c7c0124d44bf741f05fdd3b4a, type: 2}
+    poolLimit: 100
+    startCount: 20
 --- !u!1001 &1321797356
 Prefab:
   m_ObjectHideFlags: 0
