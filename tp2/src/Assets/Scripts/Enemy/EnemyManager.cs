@@ -7,15 +7,23 @@ public class EnemyManager {
 	
 	private int tanksLeft = 10;
 	
+	private int spawned = 0;
+	
 	private Transform parent;
 	
-	public EnemyManager(Transform parent) {
+	public delegate void AllKilled();
+	
+	private AllKilled allKilled;
+	
+	public EnemyManager(Transform parent, AllKilled allKilled) {
 		this.parent = parent;
+		this.allKilled = allKilled;
 	}
 	
 	public void Reset() {
 		spawnPoints.Clear();
 		tanksLeft = 10;
+		spawned = 0;
 	}
 	
 	public void AddPoint(Vector2 point) {
@@ -33,14 +41,23 @@ public class EnemyManager {
 				enemy.GetComponent<Enemy>().SpawnPoint = point;
 				
 				tanksLeft --;
+				
+				spawned++;
 			}
 		}
 	}
 	
 	public void EnemyDestroy(GameObject obj) {
+		
 		Vector2 point = obj.GetComponent<Enemy>().SpawnPoint;
 		spawnPoints[point] = false;
 		
-		Spawn();
+		spawned--;
+		if (tanksLeft == 0 && spawned == 0) {
+			allKilled();
+		} else {
+			Spawn();
+		}
 	}
+		
 }

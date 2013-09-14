@@ -15,14 +15,17 @@ public class World : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		enemyManager = new EnemyManager(transform);
+		enemyManager = new EnemyManager(transform, () => loadNextLevel());
 		loadLevel ("Assets/Levels/first.txt");
+	}
+	
+	void loadNextLevel() {
+		loadLevel("Assets/Levels/first.txt");
 	}
 
 	void loadLevel (string fileName)
 	{
 		clearLevel ();
-		
 		
 		StreamReader reader = new StreamReader(fileName, Encoding.ASCII);
 		
