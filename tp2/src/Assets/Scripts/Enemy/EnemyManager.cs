@@ -27,19 +27,24 @@ public class EnemyManager {
 	}
 	
 	public void AddPoint(Vector2 point) {
+		Debug.Log (point);
 		spawnPoints.Add(point, false);
 	}
 	
 	public void Spawn() {
-		foreach (Vector2 point in spawnPoints.Keys) {
+		Vector2[] keys = new Vector2[spawnPoints.Count];
+		spawnPoints.Keys.CopyTo(keys, 0);
+		
+		foreach (Vector2 point in keys) {
 			if (!spawnPoints[point] && tanksLeft > 0) {
 				GameObject enemy = ObjectPool.Instance.GetObject("Enemy");
 				
-				enemy.transform.position = new Vector3(point.x, 0.6f, point.y);
+				enemy.transform.position = new Vector3(point.x, 0.51f, point.y);
 				enemy.transform.parent = parent;
 				enemy.GetComponent<Destroyable>().onDestroy = EnemyDestroy;
 				enemy.GetComponent<Enemy>().SpawnPoint = point;
 				
+				spawnPoints[point] = true;
 				tanksLeft --;
 				
 				spawned++;
