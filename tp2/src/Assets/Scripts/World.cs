@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using System.Text;
+using System.Collections.Generic;
 
 using UnityEngine;
 using System.Collections;
@@ -9,15 +10,19 @@ public class World : MonoBehaviour {
 	public GameObject tank;
 	
 	private bool paused = false;
+	
+	private EnemyManager enemyManager;
 
 	// Use this for initialization
 	void Start () {
+		enemyManager = new EnemyManager(transform);
 		loadLevel ("Assets/Levels/first.txt");
 	}
 
 	void loadLevel (string fileName)
 	{
 		clearLevel ();
+		
 		
 		StreamReader reader = new StreamReader(fileName, Encoding.ASCII);
 		
@@ -44,6 +49,8 @@ public class World : MonoBehaviour {
 					tankObj.transform.parent = transform;
 				} else if (c == 'M') {
 					addBlock("Unkillable", i, j);
+				} else if (c == 'E') {
+					enemyManager.AddPoint(new Vector2(i, j));
 				}
 				
 				i++;
@@ -57,13 +64,17 @@ public class World : MonoBehaviour {
 				addBlock("Unkillable", i, j);
 			}
 		}
+		
+		enemyManager.Spawn();
 	}
 
 	void clearLevel() {
 		
+		enemyManager.Reset();
 		foreach (Transform child in transform) {
 			ObjectPool.Instance.Return(child.gameObject);
 		}
+		
 	}
 	
 	void Update () {

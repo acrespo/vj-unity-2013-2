@@ -3,8 +3,6 @@ using System.Collections;
 
 public abstract class Cannon : MonoBehaviour {
 	
-	public GameObject bulletPrefab;
-	
 	protected Team team;
 	
 	public AudioSource shootSound;

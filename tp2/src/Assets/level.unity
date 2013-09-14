@@ -103,8 +103,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab046b258af4426ca2756c8ee091190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapBlock: {fileID: 100000, guid: 3b45d29efbb3f4f94a1d1fff4607809f, type: 2}
-  unkillable: {fileID: 100000, guid: 0717045c7c0124d44bf741f05fdd3b4a, type: 2}
   tank: {fileID: 100000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
 --- !u!4 &669536594
 Transform:
@@ -149,6 +147,9 @@ MonoBehaviour:
   - prefab: {fileID: 100000, guid: 0717045c7c0124d44bf741f05fdd3b4a, type: 2}
     poolLimit: 100
     startCount: 20
+  - prefab: {fileID: 100000, guid: 8c42bc8d052004be19eddeeca445ea24, type: 2}
+    poolLimit: 10
+    startCount: 4
 --- !u!1001 &1321797356
 Prefab:
   m_ObjectHideFlags: 0
