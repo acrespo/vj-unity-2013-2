@@ -44,6 +44,15 @@ public class EnemyManager {
 				enemy.GetComponent<Destroyable>().onDestroy = EnemyDestroy;
 				enemy.GetComponent<Enemy>().SpawnPoint = point;
 				
+				MeshRenderer[] renderers = enemy.GetComponentsInChildren<MeshRenderer>() as MeshRenderer[];
+				
+				foreach (MeshRenderer renderer in renderers) {
+					Material[] materials = renderer.materials;
+					foreach (Material material in materials) {
+						material.SetColor("_Color", Color.red);
+					}
+				}
+				
 				spawnPoints[point] = true;
 				tanksLeft --;
 				
