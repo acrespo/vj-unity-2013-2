@@ -39,7 +39,7 @@ public class EnemyManager {
 			if (!spawnPoints[point] && tanksLeft > 0) {
 				GameObject enemy = ObjectPool.Instance.GetObject("Enemy");
 				
-				enemy.transform.position = new Vector3(point.x, 0.51f, point.y);
+				enemy.transform.position = new Vector3(point.x, 0.6f, point.y);
 				enemy.transform.parent = parent;
 				enemy.GetComponent<Destroyable>().onDestroy = EnemyDestroy;
 				enemy.GetComponent<Enemy>().SpawnPoint = point;

@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cab046b258af4426ca2756c8ee091190, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tank: {fileID: 100000, guid: 6b221d89102e14dca9167e419ad2a53c, type: 2}
+  tank: {fileID: 100000, guid: 813e517990d5a4347b75f30a1001d32c, type: 2}
 --- !u!4 &669536594
 Transform:
   m_ObjectHideFlags: 0
@@ -147,7 +147,7 @@ MonoBehaviour:
   - prefab: {fileID: 100000, guid: 0717045c7c0124d44bf741f05fdd3b4a, type: 2}
     poolLimit: 100
     startCount: 20
-  - prefab: {fileID: 100000, guid: 8c42bc8d052004be19eddeeca445ea24, type: 2}
+  - prefab: {fileID: 100000, guid: 1e729ed7bd28c488c8c235d2468de66f, type: 2}
     poolLimit: 10
     startCount: 4
 --- !u!1001 &1321797356
@@ -197,7 +197,8 @@ Prefab:
       propertyPath: m_LocalScale.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5400000, guid: fcc1d8680337b4df9b2bd43005cd67b4, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: fcc1d8680337b4df9b2bd43005cd67b4, type: 2}
   m_RootGameObject: {fileID: 1447110309}
   m_IsPrefabParent: 0
@@ -213,7 +214,6 @@ GameObject:
   - 33: {fileID: 1447110311}
   - 23: {fileID: 1447110312}
   - 64: {fileID: 1447110313}
-  - 54: {fileID: 1447110314}
   m_Layer: 0
   m_Name: Floor
   m_TagString: Untagged
@@ -273,22 +273,6 @@ MeshCollider:
   m_SmoothSphereCollisions: 0
   m_Convex: 0
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!54 &1447110314
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 5400000, guid: fcc1d8680337b4df9b2bd43005cd67b4,
-    type: 2}
-  m_PrefabInternal: {fileID: 1321797356}
-  m_GameObject: {fileID: 1447110309}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: .0500000007
-  m_UseGravity: 0
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
 --- !u!1 &2051255039
 GameObject:
   m_ObjectHideFlags: 0

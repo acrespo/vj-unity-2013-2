@@ -1,14 +1,18 @@
 using System;
 using UnityEngine;
 
+[RequireComponent(typeof(BoxMover))]
+[RequireComponent(typeof(Cannon))]
 public class Enemy : MonoBehaviour
 {
 	
 	public float timeBetweenMoves = 1.0f;
 	
-	private float lastMoveTime = 0f;
+	private float nextMoveTime = 0f;
 	
 	private Vector2 _spawnPoint;
+	
+	private BoxMover mover;
 	
 	public Vector2 SpawnPoint {
 		get {
@@ -20,15 +24,23 @@ public class Enemy : MonoBehaviour
 		}
 	}
 	
+	void Start() {
+		mover = GetComponent<BoxMover>();
+		nextMoveTime = Time.time + timeBetweenMoves;
+	}
+	
 	void FixedUpdate() {
 		
-		if (Time.time > lastMoveTime + timeBetweenMoves) {
-			Vector3 direction = new Vector3(UnityEngine.Random.Range(-1, 2), 1, UnityEngine.Random.Range(-1, 2));
+		if (Time.time > nextMoveTime) {
+			
+			int choice = UnityEngine.Random.Range (0, 4);
+			
+			Vector3 direction = new Vector3(choice % 2 == 0 ? choice - 1 : 0, 0, choice % 2 == 1 ? choice - 2 : 0);
 			direction /= direction.magnitude * 2;
 			
-			GetComponent<CharacterMotor>().inputMoveDirection = direction;
+			mover.moveDirection = direction;
 			
-			lastMoveTime = Time.time;
+			nextMoveTime = Time.time + timeBetweenMoves;
 		}
 	}
 }
