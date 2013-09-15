@@ -59,7 +59,7 @@ public class World : MonoBehaviour {
 					addBlock("Block", i, j);
 				} else if (c == 'P') {
 					GameObject tankObj = Instantiate(tank) as GameObject;
-					tankObj.transform.position = new Vector3(i, 0.51f, j);
+					tankObj.transform.position = new Vector3(i, 0f, j);
 					tankObj.transform.parent = transform;
 				} else if (c == 'M') {
 					addBlock("Unkillable", i, j);
