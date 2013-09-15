@@ -2232,7 +2232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 169b82ef537de4d7db1274a47064922f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 0
+  team: 1
   sound: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
