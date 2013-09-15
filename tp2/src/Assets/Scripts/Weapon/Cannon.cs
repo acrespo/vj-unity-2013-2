@@ -16,7 +16,7 @@ public class Cannon : MonoBehaviour {
 		speed.y = 0;
 		bullet.GetComponent<ConstantSpeed>().speed = speed;
 		
-		Vector3 pos = transform.position + 2 * transform.forward;
+		Vector3 pos = transform.position + transform.forward * transform.localScale.z;
 		bullet.transform.position = pos;
 		bullet.transform.forward = transform.forward;
 		bullet.transform.parent = transform.parent;
