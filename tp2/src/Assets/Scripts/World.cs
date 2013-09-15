@@ -65,6 +65,12 @@ public class World : MonoBehaviour {
 					addBlock("Unkillable", i, j);
 				} else if (c == 'E') {
 					enemyManager.AddPoint(new Vector2(i, j));
+				} else if (c == 'T') {
+					GameObject tower = ObjectPool.Instance.GetObject("Tower");
+					tower.transform.parent = transform;
+					tower.transform.position = new Vector3(i, 0f, j);
+					
+					tower.GetComponent<Destroyable>().onDestroy = TowerDestroyed;
 				}
 				
 				i++;
@@ -80,6 +86,10 @@ public class World : MonoBehaviour {
 		}
 		
 		enemyManager.Spawn();
+	}
+	
+	void TowerDestroyed(GameObject tower) {
+		Debug.Log ("YOU LOSE");
 	}
 
 	void clearLevel() {
