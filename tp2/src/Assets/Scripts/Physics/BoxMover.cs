@@ -15,6 +15,8 @@ public class BoxMover : MonoBehaviour {
 	
 		Vector3 movementDelta = moveDirection * moveSpeed / Time.fixedDeltaTime;
 		rigidbody.velocity = movementDelta;
-		rigidbody.rotation = Quaternion.LookRotation(movementDelta);
+		if (movementDelta.magnitude > 0) {
+			rigidbody.rotation = Quaternion.LookRotation(movementDelta);
+		}
 	}
 }
