@@ -31,19 +31,22 @@ public class GameMenuManager : MonoBehaviour
 		}
 	}
 	
-	public void pause ()
+	public void Pause ()
 	{
 		state = "pause";
 	}
 	
-	public void unpause ()
+	public void Unpause ()
 	{
 		state = "game";
 	}
 	
 	private void ShowGame ()
 	{
-		
+		GUI.DrawTexture (new Rect (0, 0, Screen.width, 40), overlay);
+		GUI.Label(new Rect(12, 12, 80, 40), "Enemies left: " + world.GetEnemyManager().GetTanksLeft(), "gameHUD");
+		GUI.Label(new Rect(Screen.width/2 - 40, 12, 80, 40), "Level " + world.GetCurrentLevel(), "gameHUD");
+		GUI.Label(new Rect(Screen.width - 80, 12, 80, 40), "Lifes: 3", "gameHUD");
 	}
 	
 	private void ShowPause ()
@@ -57,7 +60,7 @@ public class GameMenuManager : MonoBehaviour
 		GUILayout.Label ("Game paused", "pauseTitle");
 		
 		if (GUILayout.Button ("Continue", "pauseButton")) {
-			world.unpause ();
+			world.Unpause ();
 		}
 		
 		if (GUILayout.Button ("Exit", "pauseButton")) {

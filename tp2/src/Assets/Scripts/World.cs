@@ -106,23 +106,31 @@ public class World : MonoBehaviour {
 
 		if (Input.GetKeyDown(KeyCode.Escape)) {
 			if (paused) {
-				unpause();
+				Unpause();
 			} else {
-				pause();
+				Pause();
 			}
 		}
 	}
 	
-	public void pause() {
+	public void Pause() {
 		paused = true;
 		Time.timeScale = 0;
-		gameMenuManager.pause();
+		gameMenuManager.Pause();
 	}
 	
-	public void unpause() {
+	public void Unpause() {
 		paused = false;
 		Time.timeScale = 1;
-		gameMenuManager.unpause();
+		gameMenuManager.Unpause();
+	}
+	
+	public EnemyManager GetEnemyManager() {
+		return enemyManager;
+	}
+	
+	public int GetCurrentLevel() {
+		return currentLevel;
 	}
 	
 	private void addBlock(string type, int x, int z) {
