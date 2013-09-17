@@ -74,6 +74,50 @@ NavMeshSettings:
     widthInaccuracy: 16.666666
     heightInaccuracy: 10
   m_NavMesh: {fileID: 0}
+--- !u!1 &448460693
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 448460694}
+  - 114: {fileID: 448460695}
+  m_Layer: 0
+  m_Name: GameMenuManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &448460694
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 448460693}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 16.011097, y: .158955574, z: 5.90359163}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+--- !u!114 &448460695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 448460693}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c5de537b252674db0e8cf6e6ae35d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skin: {fileID: 11400000, guid: 14f9d964f26c833479c11e66181dd056, type: 2}
+  background: {fileID: 2800000, guid: 7e9508d23bcbc344eb28d75d5372605b, type: 3}
+  overlay: {fileID: 2800000, guid: 82b0e39327ff7e5428586afbfbd24c07, type: 3}
+  popupWidth: 450
+  popupHeight: 150
+  map: {fileID: 669536592}
 --- !u!1 &669536592
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,6 +148,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tank: {fileID: 100000, guid: 813e517990d5a4347b75f30a1001d32c, type: 2}
+  gameMenuManager: {fileID: 448460695}
 --- !u!4 &669536594
 Transform:
   m_ObjectHideFlags: 0

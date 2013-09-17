@@ -8,6 +8,7 @@ using System.Collections;
 public class World : MonoBehaviour {
 	
 	public GameObject tank;
+	public GameMenuManager gameMenuManager;
 	
 	private bool paused = false;
 	
@@ -104,15 +105,24 @@ public class World : MonoBehaviour {
 	void Update () {
 
 		if (Input.GetKeyDown(KeyCode.Escape)) {
-
 			if (paused) {
-				Time.timeScale = 1;
+				unpause();
 			} else {
-				Time.timeScale = 0;
+				pause();
 			}
-
-			paused = !paused;
 		}
+	}
+	
+	public void pause() {
+		paused = true;
+		Time.timeScale = 0;
+		gameMenuManager.pause();
+	}
+	
+	public void unpause() {
+		paused = false;
+		Time.timeScale = 1;
+		gameMenuManager.unpause();
 	}
 	
 	private void addBlock(string type, int x, int z) {
