@@ -21,6 +21,8 @@ public class World : MonoBehaviour {
 	
 	private LevelLoadAnimation animation;
 	
+	private float previousScale = 1;
+	
 	// Use this for initialization
 	void Start () {
 		enemyManager = new EnemyManager(transform, () => loadNextLevel());
@@ -152,13 +154,14 @@ public class World : MonoBehaviour {
 	
 	public void Pause() {
 		paused = true;
+		previousScale = Time.timeScale;
 		Time.timeScale = 0;
 		gameMenuManager.Pause();
 	}
 	
 	public void Unpause() {
 		paused = false;
-		Time.timeScale = 1;
+		Time.timeScale = previousScale;
 		gameMenuManager.Unpause();
 	}
 	
