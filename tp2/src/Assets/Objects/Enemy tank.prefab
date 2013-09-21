@@ -2270,6 +2270,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timeBetweenMoves: 1
+  rayLenNear: .600000024
+  rayLenFar: 1.20000005
+  raySpace: .200000003
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
