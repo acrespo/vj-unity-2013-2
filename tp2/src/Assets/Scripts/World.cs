@@ -72,7 +72,7 @@ public class World : MonoBehaviour {
 			while ((c = reader.Read()) != -1) {
 				if (c == '\n') {
 					if (width == 0) {
-						width = i;
+						width = i-1;
 					}
 					addBlock("Unkillable", -1, j);
 					addBlock("Unkillable", width, j);
