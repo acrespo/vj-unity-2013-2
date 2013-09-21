@@ -8,6 +8,7 @@ using System.Collections;
 public class World : MonoBehaviour {
 	
 	public GameObject tank;
+	
 	public GameMenuManager gameMenuManager;
 	
 	private bool paused = false;
@@ -15,13 +16,25 @@ public class World : MonoBehaviour {
 	private int currentLevel;
 	
 	private EnemyManager enemyManager;
+	
+	private int lives;
 
 	// Use this for initialization
 	void Start () {
 		enemyManager = new EnemyManager(transform, () => loadNextLevel());
 		
+		lives = 3;
 		currentLevel = 0;
 		loadNextLevel();
+	}
+	
+	public int PlayerLives {
+		get {
+			return lives;
+		}
+		set {
+			lives = value;
+		}
 	}
 	
 	void loadNextLevel() {
