@@ -54,8 +54,8 @@ public class World : MonoBehaviour {
 		
 		StreamReader reader = new StreamReader(fileName, Encoding.ASCII);
 		
+		int i = 0, j = 0, width = 0;
 		using (reader) {
-			int i = 0, j = 0, width = 0;
 			int c = -1;
 			
 			while ((c = reader.Read()) != -1) {
@@ -98,8 +98,21 @@ public class World : MonoBehaviour {
 				addBlock("Unkillable", i, j);
 			}
 		}
+	
+		CenterCamera(width, j);
 		
 		enemyManager.Spawn();
+	}
+	
+	private void CenterCamera(int width, int height) {
+		
+		Transform transform = Camera.main.transform;
+		Vector3 pos = transform.position;
+		pos.x = width / 2.0f;
+		pos.z = (height - 3) * 0.2f;
+		pos.y = (height + 5) * 0.8f;
+		
+		transform.position = pos;
 	}
 	
 	void TowerDestroyed(GameObject tower) {

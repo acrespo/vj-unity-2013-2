@@ -75,6 +75,6 @@ public class EnemyManager {
 	}
 	
 	public int GetTanksLeft(){
-		return tanksLeft;
+		return tanksLeft + spawned;
 	}
 }
