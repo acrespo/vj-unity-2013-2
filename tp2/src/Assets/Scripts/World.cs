@@ -19,17 +19,17 @@ public class World : MonoBehaviour {
 	
 	private int lives;
 	
-	private LevelLoadAnimation animation;
+	private LevelLoadAnimation loadLevelAnimation;
 	
 	private float previousScale = 1;
 	
 	// Use this for initialization
 	void Start () {
-		enemyManager = new EnemyManager(transform, () => loadNextLevel());
+		enemyManager = new EnemyManager(transform, () => LoadNextLevel());
 		
 		lives = 3;
-		currentLevel = 2;
-		loadNextLevel();
+		currentLevel = 0;
+		LoadNextLevel();
 	}
 	
 	public int PlayerLives {
@@ -43,23 +43,23 @@ public class World : MonoBehaviour {
 	
 	public bool LevelLoading {
 		get {
-			return animation != null;
+			return loadLevelAnimation != null;
 		}
 	}
 	
-	void loadNextLevel() {
+	void LoadNextLevel() {
 		currentLevel++;
 		
 		string fileName = "Assets/Levels/" + currentLevel + ".txt";
 		if (File.Exists(fileName)) {
-			loadLevel(fileName);
+			LoadLevel(fileName);
 		} else {
 			Time.timeScale = 0;
 			currentLevel = -1;
 		}
 	}
 
-	void loadLevel (string fileName)
+	void LoadLevel (string fileName)
 	{
 		clearLevel ();
 		
@@ -72,7 +72,7 @@ public class World : MonoBehaviour {
 			while ((c = reader.Read()) != -1) {
 				if (c == '\n') {
 					if (width == 0) {
-						width = i-1;
+						width = i;
 					}
 					addBlock("Unkillable", -1, j);
 					addBlock("Unkillable", width, j);
@@ -110,12 +110,10 @@ public class World : MonoBehaviour {
 			}
 		}
 	
-		
-		
 		enemyManager.Spawn();
 		
 		Time.timeScale = 0;
-		animation = new LevelLoadAnimation(CenterCamera(width, j));
+		loadLevelAnimation = new LevelLoadAnimation(CenterCamera(width, j));
 		
 	}
 	
@@ -138,10 +136,10 @@ public class World : MonoBehaviour {
 	
 	void Update () {
 		
-		if (animation != null) {
-			if (!animation.Update()) {
+		if (loadLevelAnimation != null) {
+			if (!loadLevelAnimation.Update()) {
 				Time.timeScale = 1;
-				animation = null;
+				loadLevelAnimation = null;
 			}
 		} else if (Input.GetKeyDown(KeyCode.Escape)) {
 			if (paused) {
@@ -149,6 +147,13 @@ public class World : MonoBehaviour {
 			} else {
 				Pause();
 			}
+		}
+	}
+	
+	void OnGUI() {
+		
+		if (GUI.Button(new Rect(0, 0, 20, 20), "Next")) {
+			LoadNextLevel();
 		}
 	}
 	
