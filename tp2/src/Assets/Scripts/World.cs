@@ -18,7 +18,9 @@ public class World : MonoBehaviour {
 	private EnemyManager enemyManager;
 	
 	private int lives;
-
+	
+	private LevelLoadAnimation animation;
+	
 	// Use this for initialization
 	void Start () {
 		enemyManager = new EnemyManager(transform, () => loadNextLevel());
@@ -34,6 +36,12 @@ public class World : MonoBehaviour {
 		}
 		set {
 			lives = value;
+		}
+	}
+	
+	public bool LevelLoading {
+		get {
+			return animation != null;
 		}
 	}
 	
@@ -99,20 +107,17 @@ public class World : MonoBehaviour {
 			}
 		}
 	
-		CenterCamera(width, j);
+		
 		
 		enemyManager.Spawn();
+		
+		Time.timeScale = 0;
+		animation = new LevelLoadAnimation(CenterCamera(width, j));
+		
 	}
 	
-	private void CenterCamera(int width, int height) {
-		
-		Transform transform = Camera.main.transform;
-		Vector3 pos = transform.position;
-		pos.x = width / 2.0f;
-		pos.z = (height - 3) * 0.2f;
-		pos.y = (height + 5) * 0.8f;
-		
-		transform.position = pos;
+	private Vector3 CenterCamera(int width, int height) {
+		return new Vector3(width / 2.0f, (height + 5) * 0.8f, (height - 3) * 0.2f);
 	}
 	
 	void TowerDestroyed(GameObject tower) {
@@ -128,9 +133,20 @@ public class World : MonoBehaviour {
 		
 	}
 	
+	void StopInteraction() {
+		foreach (Transform child in transform) {
+			child.gameObject.SetActive(false);
+		}
+	}
+	
 	void Update () {
-
-		if (Input.GetKeyDown(KeyCode.Escape)) {
+		
+		if (animation != null) {
+			if (!animation.Update()) {
+				Time.timeScale = 1;
+				animation = null;
+			}
+		} else if (Input.GetKeyDown(KeyCode.Escape)) {
 			if (paused) {
 				Unpause();
 			} else {
