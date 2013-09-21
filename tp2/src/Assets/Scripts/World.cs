@@ -28,7 +28,7 @@ public class World : MonoBehaviour {
 		enemyManager = new EnemyManager(transform, () => loadNextLevel());
 		
 		lives = 3;
-		currentLevel = 0;
+		currentLevel = 2;
 		loadNextLevel();
 	}
 	
