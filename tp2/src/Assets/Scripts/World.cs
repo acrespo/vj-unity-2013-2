@@ -52,7 +52,8 @@ public class World : MonoBehaviour {
 		if (File.Exists(fileName)) {
 			loadLevel(fileName);
 		} else {
-			Debug.Log ("YOU WIN");
+			Time.timeScale = 0;
+			currentLevel = -1;
 		}
 	}
 
@@ -121,7 +122,7 @@ public class World : MonoBehaviour {
 	}
 	
 	void TowerDestroyed(GameObject tower) {
-		Debug.Log ("YOU LOSE");
+		Time.timeScale = 0;
 	}
 
 	void clearLevel() {
@@ -131,12 +132,6 @@ public class World : MonoBehaviour {
 			ObjectPool.Instance.Return(child.gameObject);
 		}
 		
-	}
-	
-	void StopInteraction() {
-		foreach (Transform child in transform) {
-			child.gameObject.SetActive(false);
-		}
 	}
 	
 	void Update () {

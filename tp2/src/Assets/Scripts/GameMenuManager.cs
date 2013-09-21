@@ -45,12 +45,18 @@ public class GameMenuManager : MonoBehaviour
 	{
 		GUI.DrawTexture (new Rect (0, 0, Screen.width, 40), overlay);
 		GUI.Label(new Rect(12, 12, 200, 40), "Enemies left: " + world.GetEnemyManager().GetTanksLeft(), "gameHUD");
-		GUI.Label(new Rect(Screen.width - 80, 12, 80, 40), "Lifes: " + world.PlayerLives, "gameHUD");
+		
+		if (world.PlayerLives >= 0) {
+			GUI.Label(new Rect(Screen.width - 80, 12, 80, 40), "Lifes: " + world.PlayerLives, "gameHUD");
+		}
+		
 		
 		if (world.LevelLoading) {
 			GUI.Label(new Rect((Screen.width - 80) / 2, (Screen.height - 40) / 2, 80, 40), "Level " + world.GetCurrentLevel(), "gameMessage");
-		} else {
+		} else if (world.GetCurrentLevel() != -1) {
 			GUI.Label(new Rect(Screen.width/2 - 40, 12, 80, 40), "Level " + world.GetCurrentLevel(), "gameHUD");
+		} else {
+			GUI.Label(new Rect((Screen.width - 80) / 2, (Screen.height - 40) / 2, 80, 40), "You have saved the city!", "gameMessage");
 		}
 	}
 	
