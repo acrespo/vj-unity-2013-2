@@ -13,11 +13,19 @@ public class Enemy : MonoBehaviour
 	public float rayLenFar = 1.2f;
 	public float raySpace = 0.2f;
 	
+	public float firingDistance = 5.0f;
+	public float shootChance = 0.7f;
+	
 	private float nextMoveTime = 0f;
-	private Vector2 _spawnPoint;
-	private BoxMover mover;
 	private Vector3 rayPos1;
 	private Vector3 rayPos2;
+	
+	private bool shooting;
+	
+	private Vector2 _spawnPoint;
+	
+	private Cannon cannon;
+	private BoxMover mover;
 	
 	public Vector2 SpawnPoint {
 		get {
@@ -32,6 +40,7 @@ public class Enemy : MonoBehaviour
 	void Start ()
 	{
 		mover = GetComponent<BoxMover> ();
+		cannon = GetComponent<Cannon>();
 		nextMoveTime = Time.time + timeBetweenMovesLow;
 		rayPos1 = new Vector3 ();
 		rayPos2 = new Vector3 ();
@@ -55,15 +64,43 @@ public class Enemy : MonoBehaviour
 			Debug.DrawRay (rayPos1, mover.moveDirection.normalized * rayLenNear);
 			Debug.DrawRay (rayPos2, mover.moveDirection.normalized * rayLenNear);
 			
-			// if the raycasts hit
+			
 			if (Physics.Raycast (rayPos1, mover.moveDirection, rayLenNear) || Physics.Raycast (rayPos2, mover.moveDirection, rayLenNear)) {
+				// if the raycasts hit
 				gonnaCollide = true;
 			}
 		}
+		Debug.DrawRay(transform.position + Vector3.up * 0.1f, mover.moveDirection * firingDistance);
 		
 		// if it's time to change direction or we are gonna collide something
-		if (Time.time > nextMoveTime || gonnaCollide) {
-			ChangeDirection ();
+		if (Time.time > nextMoveTime || (!shooting && gonnaCollide)) {
+			
+			bool shoot = false;
+			RaycastHit hit;
+			if (Physics.Raycast(transform.position + Vector3.up * 0.1f, mover.moveDirection, out hit, firingDistance)) {
+				
+				Shootable shootable = hit.transform.gameObject.GetComponent<Shootable>();
+				if (shootable) {
+					
+					if (shootable.team == Team.Player) {
+						shoot = true;
+					} else if (shootable.team != Team.Enemy) {
+						shoot = UnityEngine.Random.value > shootChance;
+					}
+				}
+
+			}
+			
+			if (shoot) {
+				// SHOOOOOOT
+				cannon.Shoot();
+				mover.moveDirection = Vector3.zero;
+				nextMoveTime = Time.time + timeBetweenMovesLow;
+				shooting = true;
+			} else {
+				shooting = false;
+				ChangeDirection ();
+			}
 		}
 	}
 	

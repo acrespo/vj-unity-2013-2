@@ -13,11 +13,8 @@ public class LevelLoadAnimation
 	
 	private float end;
 	
-	private bool done;
-	
 	public LevelLoadAnimation (Vector3 cameraDestination)
 	{
-		done = false;
 		this.cameraDestination = cameraDestination;
 		start = Time.realtimeSinceStartup;
 		end = start + 3.0f;

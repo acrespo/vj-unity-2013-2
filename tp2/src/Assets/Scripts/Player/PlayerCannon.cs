@@ -3,10 +3,9 @@ using System.Collections;
 
 public class PlayerCannon : Cannon {
 	
-	public PlayerCannon() {
+	void Awake() {
 		team = Team.Player;
 	}
-	
 	
 	void FixedUpdate () {
 		

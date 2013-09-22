@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Cannon : MonoBehaviour {
 	
-	protected Team team;
+	public Team team;
 	
 	public AudioSource shootSound;
 	

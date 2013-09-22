@@ -2269,10 +2269,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a0f1748a27349e2bbf5d98f2f0ca68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeBetweenMoves: 1
+  timeBetweenMovesLow: 1
+  timeBetweenMovesHigh: 3
   rayLenNear: .600000024
   rayLenFar: 1.20000005
   raySpace: .200000003
+  firingDistance: 5
 --- !u!114 &11400008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2284,6 +2286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 653e23488d4264583b5eb12979982f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 1
   shootSound: {fileID: 0}
 --- !u!1001 &100100000
 Prefab:
