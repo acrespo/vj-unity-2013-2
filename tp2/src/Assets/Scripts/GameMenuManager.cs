@@ -30,23 +30,14 @@ public class GameMenuManager : MonoBehaviour
 			break;
 		case WorldState.Won:
 			GUI.Label(new Rect((Screen.width - 80) / 2, (Screen.height - 40) / 2, 80, 40), "You have saved the city!", "gameMessage");
+			showGameOverOptions();
 			break;
 		case WorldState.Lost:
 			GUI.Label(new Rect((Screen.width - 80) / 2, (Screen.height - 40) / 2, 80, 40), "Mess with the best, die like the rest!\n You lost!", "gameMessage");
-			
-			Rect backRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 60);
-			Rect restartRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 200, 60);
-			if (GUI.Button(backRect, "Back to menu", "gameMessage")) {
-				Application.LoadLevel(0);
-			}
-			
-			if (GUI.Button(restartRect, "Restart", "gameMessage")) {
-				world.RestartLevel();	
-			}
-			
+			showGameOverOptions();
 			break;
 		case WorldState.Pause:
-			ShowPause ();
+			ShowPause();
 			break;
 		}
 		
@@ -83,6 +74,18 @@ public class GameMenuManager : MonoBehaviour
 		}
 	}
 		
+	private void showGameOverOptions() {
+		Rect backRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 60);
+		Rect restartRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 200, 60);
+		if (GUI.Button(backRect, "Back to menu", "gameMessage")) {
+			Application.LoadLevel(0);
+		}
+
+		if (GUI.Button(restartRect, "Restart", "gameMessage")) {
+			world.RestartLevel();
+		}
+	}
+
 	private void ShowPause ()
 	{
 		Rect popupRect = new Rect ((Screen.width - popupWidth) / 2, (Screen.height - popupHeight) / 2, popupWidth, popupHeight);
