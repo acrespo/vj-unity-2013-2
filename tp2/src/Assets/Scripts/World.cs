@@ -8,22 +8,14 @@ using System.Collections;
 public class World : MonoBehaviour {
 	
 	public GameObject tank;
-	
 	public GameMenuManager gameMenuManager;
-	
 	private bool paused = false;
-	
 	private int currentLevel;
-	
 	private EnemyManager enemyManager;
-	
 	private int lives;
-	
 	private LevelLoadAnimation loadLevelAnimation;
-	
 	private float previousScale = 1;
 	
-	// Use this for initialization
 	void Start () {
 		enemyManager = new EnemyManager(transform, () => LoadNextLevel());
 		
@@ -38,12 +30,9 @@ public class World : MonoBehaviour {
 		}
 		set {
 			lives = value;
-		}
-	}
-	
-	public bool LevelLoading {
-		get {
-			return loadLevelAnimation != null;
+			if (lives <= 0) {
+				gameMenuManager.GameOver(false);
+			}
 		}
 	}
 	
@@ -55,9 +44,20 @@ public class World : MonoBehaviour {
 			LoadLevel(fileName);
 		} else {
 			Time.timeScale = 0;
-			currentLevel = -1;
+			gameMenuManager.GameOver(true);
 		}
 	}
+		
+	public void RestartLevel() {
+		
+		string fileName = "Assets/Levels/" + currentLevel + ".txt";
+		if (File.Exists(fileName)) {
+			LoadLevel(fileName);
+		} else {
+			Debug.Log("RestartLevel didnt found level fiel. This should REALLY never happen...");
+		}
+	}
+	
 
 	void LoadLevel (string fileName)
 	{
@@ -114,6 +114,7 @@ public class World : MonoBehaviour {
 		
 		Time.timeScale = 0;
 		loadLevelAnimation = new LevelLoadAnimation(CenterCamera(width, j));
+		gameMenuManager.LoadingLevel();
 		
 	}
 	
@@ -123,6 +124,7 @@ public class World : MonoBehaviour {
 	
 	void TowerDestroyed(GameObject tower) {
 		Time.timeScale = 0;
+		gameMenuManager.GameOver(false);
 	}
 
 	void clearLevel() {
@@ -140,6 +142,7 @@ public class World : MonoBehaviour {
 			if (!loadLevelAnimation.Update()) {
 				Time.timeScale = 1;
 				loadLevelAnimation = null;
+				gameMenuManager.LevelLoaded();
 			}
 		} else if (Input.GetKeyDown(KeyCode.Escape)) {
 			if (paused) {

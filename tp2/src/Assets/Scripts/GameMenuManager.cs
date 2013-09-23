@@ -10,7 +10,7 @@ public class GameMenuManager : MonoBehaviour
 	public int popupHeight = 150;
 	public GameObject map;
 	private World world;
-	private string state = "game";
+	private WorldState state = WorldState.Loading;
 	
 	void Awake ()
 	{
@@ -21,45 +21,68 @@ public class GameMenuManager : MonoBehaviour
 	{
 		GUI.skin = skin;
 		
+		GUI.DrawTexture(new Rect (0, 0, Screen.width, 40), overlay);
+		GUI.Label(new Rect(12, 12, 200, 40), "Enemies left: " + world.GetEnemyManager().GetTanksLeft(), "gameHUD");
+		
 		switch (state) {
-		case "game":
-			ShowGame ();
+		case WorldState.Loading:
+			GUI.Label(new Rect((Screen.width - 80) / 2, (Screen.height - 40) / 2, 80, 40), "Level " + world.GetCurrentLevel(), "gameMessage");
 			break;
-		case "pause":
+		case WorldState.Won:
+			GUI.Label(new Rect((Screen.width - 80) / 2, (Screen.height - 40) / 2, 80, 40), "You have saved the city!", "gameMessage");
+			break;
+		case WorldState.Lost:
+			GUI.Label(new Rect((Screen.width - 80) / 2, (Screen.height - 40) / 2, 80, 40), "Mess with the best, die like the rest!\n You lost!", "gameMessage");
+			
+			Rect backRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 60);
+			Rect restartRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 200, 60);
+			if (GUI.Button(backRect, "Back to menu", "gameMessage")) {
+				Application.LoadLevel(0);
+			}
+			
+			if (GUI.Button(restartRect, "Restart", "gameMessage")) {
+				world.RestartLevel();	
+			}
+			
+			break;
+		case WorldState.Pause:
 			ShowPause ();
 			break;
 		}
+		
+		GUI.Label(new Rect(Screen.width - 80, 12, 80, 40), "Lifes: " + world.PlayerLives, "gameHUD");
+		GUI.Label(new Rect(Screen.width/2 - 40, 12, 80, 40), "Level " + world.GetCurrentLevel(), "gameHUD");
 	}
 	
 	public void Pause ()
 	{
-		state = "pause";
+		state = WorldState.Pause;
 	}
 	
 	public void Unpause ()
 	{
-		state = "game";
+		state = WorldState.Playing;
 	}
 	
-	private void ShowGame ()
+	public void LoadingLevel()
 	{
-		GUI.DrawTexture (new Rect (0, 0, Screen.width, 40), overlay);
-		GUI.Label(new Rect(12, 12, 200, 40), "Enemies left: " + world.GetEnemyManager().GetTanksLeft(), "gameHUD");
-		
-		if (world.PlayerLives >= 0) {
-			GUI.Label(new Rect(Screen.width - 80, 12, 80, 40), "Lifes: " + world.PlayerLives, "gameHUD");
-		}
-		
-		
-		if (world.LevelLoading) {
-			GUI.Label(new Rect((Screen.width - 80) / 2, (Screen.height - 40) / 2, 80, 40), "Level " + world.GetCurrentLevel(), "gameMessage");
-		} else if (world.GetCurrentLevel() != -1) {
-			GUI.Label(new Rect(Screen.width/2 - 40, 12, 80, 40), "Level " + world.GetCurrentLevel(), "gameHUD");
-		} else {
-			GUI.Label(new Rect((Screen.width - 80) / 2, (Screen.height - 40) / 2, 80, 40), "You have saved the city!", "gameMessage");
-		}
+		state = WorldState.Loading;
 	}
 	
+	public void LevelLoaded()
+	{
+		state = WorldState.Playing;
+	}
+	
+	public void GameOver(bool won)
+	{
+		if (won) {
+			state = WorldState.Won;
+		} else {
+			state = WorldState.Lost;
+		}
+	}
+		
 	private void ShowPause ()
 	{
 		Rect popupRect = new Rect ((Screen.width - popupWidth) / 2, (Screen.height - popupHeight) / 2, popupWidth, popupHeight);
