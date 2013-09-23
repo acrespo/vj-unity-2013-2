@@ -82,6 +82,9 @@ public class GameMenuManager : MonoBehaviour
 		}
 
 		if (GUI.Button(restartRect, "Restart", "gameMessage")) {
+			if (world.PlayerLives <= 0) {
+				world.PlayerLives = 3;
+			}
 			world.RestartLevel();
 		}
 	}
