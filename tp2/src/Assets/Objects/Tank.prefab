@@ -14,6 +14,7 @@ GameObject:
   - 114: {fileID: 11400000}
   - 114: {fileID: 11400002}
   - 114: {fileID: 11400006}
+  - 82: {fileID: 8200002}
   m_Layer: 8
   m_Name: Tank
   m_TagString: Untagged
@@ -2220,6 +2221,104 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.20000005, y: 2.0999999, z: 4.80000019}
   m_Center: {x: 0, y: .949999988, z: 0}
+--- !u!82 &8200002
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 100000}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_audioClip: {fileID: 8300000, guid: 8f03951fee9bec9478d1ec979ba44677, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: .00200000009
+      value: .915000021
+      inSlope: -500.200928
+      outSlope: -500.200928
+      tangentMode: 0
+    - time: .00400000019
+      value: .415000021
+      inSlope: -125.050232
+      outSlope: -125.050232
+      tangentMode: 0
+    - time: .00800000038
+      value: .165000021
+      inSlope: -31.262558
+      outSlope: -31.262558
+      tangentMode: 0
+    - time: .0160000008
+      value: .0400000215
+      inSlope: -7.8156395
+      outSlope: -7.8156395
+      tangentMode: 0
+    - time: .0320000015
+      value: 0
+      inSlope: -1.95390987
+      outSlope: -1.95390987
+      tangentMode: 0
+    - time: .064000003
+      value: 0
+      inSlope: -.488477468
+      outSlope: -.488477468
+      tangentMode: 0
+    - time: .128000006
+      value: 0
+      inSlope: -.122119367
+      outSlope: -.122119367
+      tangentMode: 0
+    - time: .256000012
+      value: 0
+      inSlope: -.0305298418
+      outSlope: -.0305298418
+      tangentMode: 0
+    - time: .512000024
+      value: 0
+      inSlope: -.00763246045
+      outSlope: -.00763246045
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: -.00200079847
+      outSlope: -.00200079847
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2231,7 +2330,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7df40243d2a8c487bad3cf42fed6ebd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shootSound: {fileID: 0}
+  team: 0
+  shootSound: {fileID: 8200002}
 --- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1

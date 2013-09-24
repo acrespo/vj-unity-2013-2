@@ -3,8 +3,6 @@ using System.Collections;
 
 public class Destroyable : Shootable {
 	
-	public AudioSource sound;
-	
 	public delegate void OnDestroy(GameObject self);
 	
 	public OnDestroy onDestroy;
@@ -16,8 +14,5 @@ public class Destroyable : Shootable {
 			onDestroy(gameObject);
 		}
 		
-		if (sound) {
-			SoundManager.Instance.Play(sound);
-		}
 	}
 }
