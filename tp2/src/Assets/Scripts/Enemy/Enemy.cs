@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
 	public float raySpace = 0.2f;
 	
 	public float firingDistance = 5.0f;
-	public float shootChance = 0.7f;
+	public float shootChance = 0.9f;
 	
 	private float nextMoveTime = 0f;
 	private Vector3 rayPos1;
