@@ -13,8 +13,8 @@ public class Enemy : MonoBehaviour
 	public float rayLenFar = 1.2f;
 	public float raySpace = 0.2f;
 	
-	public float firingDistance = 5.0f;
-	public float shootChance = 0.9f;
+	public float firingDistance = 9.0f;
+	public float shootChance = 0.7f;
 	
 	private float nextMoveTime = 0f;
 	private Vector3 rayPos1;
