@@ -12,7 +12,11 @@ public class Bullet : MonoBehaviour {
 			
 			GameObject explosion = ObjectPool.Instance.GetObject("Explosion");
 			explosion.transform.position = gameObject.transform.position;
-			explosion.GetComponent<Detonator>().Explode();
+			
+			Detonator detonator = explosion.GetComponent<Detonator>();
+			detonator.size = 3.0f;
+			detonator.Explode();
+		
 			SoundManager.Instance.Play(explosion.GetComponent<AudioSource>());
 		
 			imp.Hit();

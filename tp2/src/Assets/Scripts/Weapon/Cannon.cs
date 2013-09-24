@@ -20,7 +20,7 @@ public class Cannon : MonoBehaviour {
 		bullet.transform.position = pos;
 		bullet.transform.forward = transform.forward;
 		bullet.transform.parent = transform.parent;
-		
+	
 		SoundManager.Instance.Play(shootSound);
 	}
 }
