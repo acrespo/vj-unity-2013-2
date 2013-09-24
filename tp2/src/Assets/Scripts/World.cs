@@ -37,11 +37,13 @@ public class World : MonoBehaviour {
 	}
 	
 	void LoadNextLevel() {
-		currentLevel++;
 		
-		string fileName = "Assets/Levels/" + currentLevel + ".txt";
-		if (File.Exists(fileName)) {
-			LoadLevel(fileName);
+		string fileName = "Levels/" + (currentLevel + 1);
+		TextAsset asset = Resources.Load(fileName) as TextAsset;
+		Debug.Log (asset);
+		if (asset != null) {
+			currentLevel++;
+			LoadLevel(asset.text);
 		} else {
 			Time.timeScale = 0;
 			gameMenuManager.GameOver(true);
@@ -50,26 +52,28 @@ public class World : MonoBehaviour {
 		
 	public void RestartLevel() {
 		
-		string fileName = "Assets/Levels/" + currentLevel + ".txt";
-		if (File.Exists(fileName)) {
-			LoadLevel(fileName);
+		string fileName = "Levels/" + currentLevel;
+		TextAsset asset = Resources.Load(fileName, typeof(TextAsset)) as TextAsset;
+		if (asset != null) {
+			LoadLevel(asset.text);
 		} else {
 			Debug.Log("RestartLevel didnt found level fiel. This should REALLY never happen...");
 		}
 	}
 	
 
-	void LoadLevel (string fileName)
+	void LoadLevel (string map)
 	{
 		clearLevel ();
 		
-		StreamReader reader = new StreamReader(fileName, Encoding.ASCII);
+		//StreamReader reader = new StreamReader(fileName, Encoding.ASCII);
 		
 		int i = 0, j = 0, width = 0;
-		using (reader) {
-			int c = -1;
+		//using (reader) {
+			//int c = -1;
 			
-			while ((c = reader.Read()) != -1) {
+			foreach (char c in map) {
+			//while ((c = reader.Read()) != -1) {
 				if (c == '\n') {
 					if (width == 0) {
 						width = i;
@@ -109,7 +113,7 @@ public class World : MonoBehaviour {
 				addBlock("Unkillable", i, -1);
 				addBlock("Unkillable", i, j);
 			}
-		}
+		//}
 	
 		enemyManager.Spawn();
 		
