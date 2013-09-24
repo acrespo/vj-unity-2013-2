@@ -86,6 +86,7 @@ public class World : MonoBehaviour {
 					GameObject tankObj = Instantiate(tank) as GameObject;
 					tankObj.transform.position = new Vector3(i, 0f, j);
 					tankObj.transform.parent = transform;
+					tankObj.GetComponent<PlayerController>().SpawnPoint = new Vector2(i, j);
 				} else if (c == 'M') {
 					addBlock("Unkillable", i, j);
 				} else if (c == 'E') {

@@ -6,6 +6,17 @@ using System;
 public class PlayerController : MonoBehaviour {
 	
 	private BoxMover mover;
+	private Vector2 _spawnPoint;
+	
+	public Vector2 SpawnPoint {
+		get {
+			return _spawnPoint;
+		}
+		
+		set {
+			_spawnPoint = value;
+		}
+	}
 	
 	void Start() {
 		mover = GetComponent<BoxMover>();
