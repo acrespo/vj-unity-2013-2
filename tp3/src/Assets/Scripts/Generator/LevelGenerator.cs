@@ -303,17 +303,64 @@ namespace Generator {
 		public void Populate(Level level) {
 			GameObject go = level.gameObject;
 			
-			for (int i = 0; i < width; i++) {
-				for (int j = 0; j < height; j++) {
-					
-					if (map[i, j] == TileState.PATH || map[i, j] == TileState.ROOM) {
-						
+			
+			foreach (Room r in rooms.Values) {			
+				
+				GameObject container = new GameObject("Room (x, y) = (" + r.X + ", " + r.Y + ")");
+				container.transform.parent = go.transform;
+				container.transform.position = new Vector3(10 * r.X, 0, 10 * r.Y);
+				
+				for (int i = 0; i <= r.Width; i++) {
+					for (int j = 0; j <= r.Height; j++) {
 						GameObject floor = GameObject.Instantiate(level.floor) as GameObject;
-						floor.transform.parent = go.transform;
-						floor.transform.position = new Vector3(10 * i, -0.05f, 10 * j);
+						floor.transform.parent = container.transform;
+						floor.transform.localPosition = new Vector3(10 * i, 0, 10 * j);
 					}
 				}
+				
+				for (int i = 0; i <= r.Width; i++) {
+					PlaceWall(container, level.wall, new Vector2(i, 0), Vector2.up);
+					PlaceWall(container, level.wall, new Vector2(i, r.Height), -Vector2.up);
+				}
+				
+				for (int j = 0; j <= r.Height; j++) {
+					PlaceWall(container, level.wall, new Vector2(0, j), Vector2.right);
+					PlaceWall(container, level.wall, new Vector2(r.Width, j), -Vector2.right);
+				}
 			}
+			
+			foreach (Path p in paths) {
+				
+				GameObject container = new GameObject(
+					"Path from (" + p.Origin.X + ", " + p.Origin.Y + ") to (" + p.Destination.X + ", " + p.Destination.Y + ")"
+				);
+				container.transform.parent = go.transform;
+				container.transform.position = Vector3.zero;
+				
+				foreach (Vector2 v in p.Points) {
+					GameObject floor = GameObject.Instantiate(level.floor) as GameObject;
+					floor.transform.parent = container.transform;
+					floor.transform.position = new Vector3(10 * v.x, 0, 10 * v.y);
+				}
+				
+			}
+		}
+		
+		private void PlaceWall(GameObject container, GameObject wallPrefab, Vector2 pos, Vector2 facing) {
+			facing.Normalize();
+			GameObject wall = GameObject.Instantiate(wallPrefab) as GameObject;
+			Vector2 final = pos * 10 - 5 * facing;
+			wall.transform.parent = container.transform;
+			wall.transform.localPosition = new Vector3(final.x, 10, final.y);
+			float angle = Mathf.Acos(Vector2.Dot(Vector2.up, facing) / facing.magnitude);
+			if (facing.x < 0) {
+				angle = -angle;
+			}
+			
+			Debug.Log(facing);
+			Debug.Log(angle);
+			
+			wall.transform.localRotation = Quaternion.Euler(90, angle * 180 / Mathf.PI, 0);
 		}
 		
 		public enum TileState {
