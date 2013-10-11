@@ -3,13 +3,11 @@ using System.Collections;
 
 public class Level : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+	public GameObject floor;
 	
-	}
+	public int width;
 	
-	// Update is called once per frame
-	void Update () {
+	public int height;
 	
-	}
+	
 }

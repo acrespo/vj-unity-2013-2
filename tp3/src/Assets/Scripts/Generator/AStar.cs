@@ -86,6 +86,17 @@ namespace Generator
 		}
 		
 		private bool TouchesRoom(Room r, Vector2 p) {
+			
+			if (r.X - 1 == p.x && r.Y - 1 == p.y) {
+				return false;
+			} else if (r.X - 1 == p.x && r.Y + r.Height + 1 == p.y) {
+				return false;
+			} else if (r.X + r.Width + 1 == p.x && r.Y - 1 == p.y) {
+				return false;
+			} else if (r.X + r.Width + 1 == p.x && r.Y + r.Height + 1 == p.y) {
+				return false;
+			}
+			
 			return r.X - 1 <= p.x && p.x <= r.X + 1 + r.Width && r.Y - 1 <= p.y && p.y <= r.Y + r.Height + 1;
 		}
 		
@@ -104,7 +115,7 @@ namespace Generator
 					if (parent.parent != null) {
 						Vector2 dir = p - parent.p;
 						if (parent.parent.p + 2 * dir != p) {
-							this.g++;
+							this.g += 2;
 						}
 					} else {
 					}

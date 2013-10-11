@@ -13,7 +13,7 @@ namespace Generator {
 		
 		private int width;
 		
-		private int pad = 2;
+		private int pad = 3;
 		
 		public Room (int x, int y, int height, int width) {
 			this.x = x;

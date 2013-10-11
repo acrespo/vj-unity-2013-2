@@ -60,7 +60,7 @@ namespace Generator {
 				for (gamma = max; gamma > min; gamma -= step) {
 					
 					float distance = Vector2.Distance(position(0.0f), position(2 * Mathf.PI));
-					if (distance > ROOM_SIZE_CAP * 1.2) {
+					if (distance > (ROOM_SIZE_CAP + 3) * 1.2) {
 						break;
 					}
 				}
@@ -182,14 +182,21 @@ namespace Generator {
 			int maxY = room.PaddedY + room.PaddedHeight;
 			
 			for (int i = room.PaddedX; i <= maxX; i++) {
-				map[i, room.PaddedY] = TileState.EMTPY;
-				map[i, maxY] = TileState.EMTPY;
+				if (map[i, room.PaddedY] == TileState.PAD) {
+					map[i, room.PaddedY] = TileState.EMTPY;
+				}
+				if (map[i, maxY] == TileState.PAD) {
+					map[i, maxY] = TileState.EMTPY;
+				}
 			}
 			
 			for (int j = room.PaddedY; j <= maxY; j++) {
-				
-				map[room.PaddedX, j] = TileState.EMTPY;
-				map[maxX, j] = TileState.EMTPY;
+				if (map[room.PaddedX, j] == TileState.PAD) {
+					map[room.PaddedX, j] = TileState.EMTPY;
+				}
+				if (map[maxX, j] == TileState.PAD) {
+					map[maxX, j] = TileState.EMTPY;
+				}
 			}
 			
 			room.Pad -= 1;
@@ -199,31 +206,64 @@ namespace Generator {
 			
 			RemovePadFromRoom(r1);
 			RemovePadFromRoom(r2);
+			RemovePadFromRoom(r2);
 			
 			Vector2 start;
 			Vector2 end;
 			
 			double angle = Math.Atan2(r2.CenterY - r1.CenterY, r2.CenterX - r1.CenterX);
 			if (-Math.PI / 4 < angle && angle <= Math.PI / 4) {
-				start = new Vector2(r1.X - 1, r1.CenterY);
-				end = new Vector2(r2.X + r2.Width + 1, r2.CenterY);
+				start = new Vector2(r1.X + r1.Width + 1, r1.CenterY);
+				end = new Vector2(r2.X - 1, r2.CenterY);
 			} else if (Math.PI / 4 < angle && angle <= 3 * Math.PI / 4) {
 				start = new Vector2(r1.CenterX, r1.Y + r1.Height + 1);
 				end = new Vector2(r2.CenterX, r2.Y - 1);
 			} else if (3 * Math.PI / 4 < angle || angle < - 3 * Math.PI / 4) {
-				start = new Vector2(r1.X + r1.Width + 1, r1.CenterY);
-				end = new Vector2(r2.X - 1, r2.CenterY);
+				start = new Vector2(r1.X - 1, r1.CenterY);
+				end = new Vector2(r2.X + r2.Width + 1, r2.CenterY);
 			} else {
 				start = new Vector2(r1.CenterX, r1.Y - 1);
 				end = new Vector2(r2.CenterX, r2.Y + r2.Height + 1);
 			}
 			
+			map[(int) start.x, (int) start.y] = TileState.EMTPY;
 			List<Vector2> path = new AStar().findPath(map, start, end, r2);
 			foreach (Vector2 p in path) {
 				map[(int) p.x, (int) p.y] = TileState.PATH;
 			}
 			
 			paths.Add(new Path(r1, r2, path));
+			AddPad(r2);
+			AddPad(r2);
+			AddPad(r1);
+		}
+		
+		private void AddPad(Room room) {
+			
+			room.Pad++;
+			
+			int maxX = room.PaddedX + room.PaddedWidth;
+			int maxY = room.PaddedY + room.PaddedHeight;
+			
+			for (int i = room.PaddedX; i <= maxX; i++) {
+				if (map[i, room.PaddedY] == TileState.EMTPY) {
+					map[i, room.PaddedY] = TileState.PAD;
+				}
+				if (map[i, maxY] == TileState.EMTPY) {
+					map[i, maxY] = TileState.PAD;
+				}
+			}
+			
+			for (int j = room.PaddedY; j <= maxY; j++) {
+				if (map[room.PaddedX, j] == TileState.EMTPY) {
+					map[room.PaddedX, j] = TileState.PAD;
+				}
+				if (map[maxX, j] == TileState.EMTPY) {
+					map[maxX, j] = TileState.PAD;
+				}
+			}
+			
+			
 		}
 		
 		private bool CanPlaceRoom(Room room) {
@@ -260,7 +300,20 @@ namespace Generator {
 			
 		}
 		
-		public void populate(GameObject go) {
+		public void Populate(Level level) {
+			GameObject go = level.gameObject;
+			
+			for (int i = 0; i < width; i++) {
+				for (int j = 0; j < height; j++) {
+					
+					if (map[i, j] == TileState.PATH || map[i, j] == TileState.ROOM) {
+						
+						GameObject floor = GameObject.Instantiate(level.floor) as GameObject;
+						floor.transform.parent = go.transform;
+						floor.transform.position = new Vector3(10 * i, -0.05f, 10 * j);
+					}
+				}
+			}
 		}
 		
 		public enum TileState {

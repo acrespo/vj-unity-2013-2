@@ -1,34 +1,39 @@
 ﻿using UnityEngine;
 using UnityEditor;
-using System.Collections;
+using System.Collections.Generic;
 using System;
 
 [CustomEditor(typeof(Level))]
 public class LevelGenerator : Editor {
 	
-	private int width;
-	
-	private int height;
-	
+	[SerializeField]
 	private int desiredRooms;
 	
 	public override void OnInspectorGUI ()
 	{
-		width = EditorGUILayout.IntField("Width", width);
-		height = EditorGUILayout.IntField("Height", height);
+		DrawDefaultInspector();
+
 		desiredRooms = EditorGUILayout.IntField("Target Room Count", desiredRooms);
 		
 		if (GUILayout.Button("Generate")) {
 			
 			Level level = target as Level;
 			GameObject go = level.gameObject;
+			List<GameObject> gos = new List<GameObject>();
 			foreach (Transform child in go.transform) {
-				GameObject.DestroyObject(child.gameObject);
+				gos.Add(child.gameObject);
+			}
+			foreach (GameObject toDie in gos) {
+				GameObject.DestroyImmediate(toDie);
 			}
 			
 			Console.WriteLine ("running");
 
-			new Generator.LevelGenerator(width, height, desiredRooms).Generate();
+		 	Generator.LevelGenerator g = new Generator.LevelGenerator(level.width, level.height, desiredRooms);
+			g.Generate();
+			g.Populate(level);
+			EditorUtility.SetDirty(go);
+			
 		}
 	}
 	
