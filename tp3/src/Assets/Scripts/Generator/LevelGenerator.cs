@@ -347,17 +347,17 @@ namespace Generator {
 		}
 		
 		private void PlaceWall(GameObject container, GameObject wallPrefab, Vector2 pos, Vector2 facing) {
-			facing.Normalize();
+			
 			GameObject wall = GameObject.Instantiate(wallPrefab) as GameObject;
 			Vector2 final = pos * 10 - 5 * facing;
 			wall.transform.parent = container.transform;
 			wall.transform.localPosition = new Vector3(final.x, 1.5f, final.y);
 			wall.transform.localScale = new Vector3(1, 1, 0.3f);
-			float angle = Mathf.Acos(Vector2.Dot(Vector2.up, facing) / facing.magnitude);
+			float angle = Mathf.Acos(Vector2.Dot(Vector2.up, facing));
 			if (facing.x < 0) {
 				angle = -angle;
 			}
-			
+				
 			wall.transform.localRotation = Quaternion.Euler(90, angle * 180 / Mathf.PI, 0);
 		}
 		
