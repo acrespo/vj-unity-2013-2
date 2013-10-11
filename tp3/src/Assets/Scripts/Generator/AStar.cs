@@ -99,7 +99,15 @@ namespace Generator
 				this.parent = parent;
 				this.p = p;
 				if (parent != null) {
+					
 					this.g = parent.g + 1;
+					if (parent.parent != null) {
+						Vector2 dir = p - parent.p;
+						if (parent.parent.p + 2 * dir != p) {
+							this.g++;
+						}
+					} else {
+					}
 				}
 				this.h = h(this);
 			}
