@@ -25,6 +25,8 @@ namespace Generator {
 		
 		private SortedList<float, Room> rooms = new SortedList<float, Room>();
 		
+		private List<Path> paths = new List<Path>();
+		
 		private float maxR;
 		
 		private float gamma;
@@ -133,7 +135,7 @@ namespace Generator {
 				}
 				
 			}
-				
+			
 			ConnectRooms();
 			
 			PrintMap ();
@@ -201,7 +203,7 @@ namespace Generator {
 			Vector2 start;
 			Vector2 end;
 			
-			double angle = Math.Atan2(r2.CenterY - r1.CenterY, r2.CenterX - r2.CenterX);
+			double angle = Math.Atan2(r2.CenterY - r1.CenterY, r2.CenterX - r1.CenterX);
 			if (-Math.PI / 4 < angle && angle <= Math.PI / 4) {
 				start = new Vector2(r1.X - 1, r1.CenterY);
 				end = new Vector2(r2.X + r2.Width + 1, r2.CenterY);
@@ -221,6 +223,7 @@ namespace Generator {
 				map[(int) p.x, (int) p.y] = TileState.PATH;
 			}
 			
+			paths.Add(new Path(r1, r2, path));
 		}
 		
 		private bool CanPlaceRoom(Room room) {
