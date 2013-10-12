@@ -319,13 +319,21 @@ namespace Generator {
 				}
 				
 				for (int i = 0; i <= r.Width; i++) {
-					PlaceWall(container, level.wall, new Vector2(i, 0), Vector2.up);
-					PlaceWall(container, level.wall, new Vector2(i, r.Height), -Vector2.up);
+					if (!IsDoor(container, new Vector2(i, 0), Vector2.up)) {
+						PlaceWall(container, level.wall, new Vector2(i, 0), Vector2.up);
+					}
+					if (!IsDoor(container, new Vector2(i, r.Height), -Vector2.up)) {
+						PlaceWall(container, level.wall, new Vector2(i, r.Height), -Vector2.up);
+					}
 				}
 				
 				for (int j = 0; j <= r.Height; j++) {
-					PlaceWall(container, level.wall, new Vector2(0, j), Vector2.right);
-					PlaceWall(container, level.wall, new Vector2(r.Width, j), -Vector2.right);
+					if (!IsDoor(container, new Vector2(0, j), Vector2.right)) {
+						PlaceWall(container, level.wall, new Vector2(0, j), Vector2.right);
+					}
+					if (!IsDoor(container, new Vector2(r.Width, j), -Vector2.right)) {
+						PlaceWall(container, level.wall, new Vector2(r.Width, j), -Vector2.right);
+					}
 				}
 			}
 			
@@ -344,6 +352,11 @@ namespace Generator {
 				}
 				
 			}
+		}
+		
+		private bool IsDoor(GameObject container, Vector2 pos, Vector2 facing) {
+			Vector3 parent = container.transform.position;
+			return map[(int) (parent.x / 10 + pos.x - facing.x), (int) (parent.z / 10 + pos.y - facing.y)] == TileState.PATH;
 		}
 		
 		private void PlaceWall(GameObject container, GameObject wallPrefab, Vector2 pos, Vector2 facing) {
