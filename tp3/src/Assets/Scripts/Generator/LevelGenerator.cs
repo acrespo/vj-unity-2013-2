@@ -337,6 +337,13 @@ namespace Generator {
 				}
 			}
 			
+			Vector2[] displacements = new Vector2[] {
+				Vector2.right,
+				Vector2.up,
+				-Vector2.up,
+				-Vector2.right
+			};
+			
 			foreach (Path p in paths) {
 				
 				GameObject container = new GameObject(
@@ -354,13 +361,6 @@ namespace Generator {
 					floor.transform.position = new Vector3(10 * v.x, 0, 10 * v.y);
 				}
 				
-				Vector2[] displacements = new Vector2[] {
-					Vector2.right,
-					Vector2.up,
-					-Vector2.up,
-					-Vector2.right
-				};
-				
 				for (int i = 1; i < p.Points.Count - 1; i++) {
 					Vector2 from = points[i] - points[i - 1];
 					Vector2 to = points[i] - points[i + 1];
@@ -375,31 +375,13 @@ namespace Generator {
 					
 				}
 				
-				foreach (Vector2 w in displacements) {
-					
-					if (map[(int) (points[0].x + w.x), (int) (points[0].y + w.y)] == TileState.ROOM) {
-						
-						foreach (Vector2 v in displacements) {
-							if (v == w || v == -w) {
-								continue;
-							}
-							
-							PlaceWall(container, level.wall, points[0], v);
-						}
-					}
-				}
-				
 				Vector2 last = points[points.Count - 1];
-				Vector2 lastFrom = last - points[points.Count - 2];
-				Debug.Log ("Point at " + last);
-				Debug.Log (lastFrom);
 				foreach (Vector2 w in displacements) {
 					
 					if (map[(int) (last.x + w.x), (int) (last.y + w.y)] == TileState.ROOM) {
 						
-						Debug.Log (w);
 						foreach (Vector2 v in displacements) {
-							if (v == lastFrom || v == -w) {
+							if (v == w || v == -w) {
 								continue;
 							}
 							
@@ -409,7 +391,27 @@ namespace Generator {
 				}
 				
 				
+				Vector2 first = points[0];
+				Vector2 firstTo = first - points[1];
+				Debug.Log ("Point at " + first);
+				Debug.Log (firstTo);
+				foreach (Vector2 w in displacements) {
+					
+					if (map[(int) (first.x + w.x), (int) (first.y + w.y)] == TileState.ROOM) {
+						
+						foreach (Vector2 v in displacements) {
+							if (v == firstTo || v == -w) {
+								continue;
+							}
+							
+							PlaceWall(container, level.wall, first, v);
+						}
+					}
+				}
+				
+				
 			}
+			
 		}
 		
 		private bool IsDoor(GameObject container, Vector2 pos, Vector2 facing) {
