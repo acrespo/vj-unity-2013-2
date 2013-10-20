@@ -301,8 +301,11 @@ namespace Generator {
 		}
 		
 		public void Populate(Level level) {
+			
 			GameObject go = level.gameObject;
 			
+			Room firstRoom = rooms[rooms.Keys[0]];
+			level.playerInstance.transform.position = new Vector3(firstRoom.CenterX * 10, 1, firstRoom.CenterY * 10);
 			
 			foreach (Room r in rooms.Values) {			
 				

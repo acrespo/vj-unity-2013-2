@@ -9,6 +9,8 @@ public class Level : MonoBehaviour {
 	
 	public GameObject roof;
 	
+	public GameObject playerInstance;
+	
 	public int width;
 	
 	public int height;
