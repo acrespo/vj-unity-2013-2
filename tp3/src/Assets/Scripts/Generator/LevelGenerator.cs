@@ -315,6 +315,10 @@ namespace Generator {
 						GameObject floor = GameObject.Instantiate(level.floor) as GameObject;
 						floor.transform.parent = container.transform;
 						floor.transform.localPosition = new Vector3(10 * i, 0, 10 * j);
+						
+						GameObject roof = GameObject.Instantiate(level.roof) as GameObject;
+						roof.transform.parent = container.transform;
+						roof.transform.localPosition = new Vector3(10 * i, 10, 10 * j);
 					}
 				}
 				
@@ -359,6 +363,10 @@ namespace Generator {
 					GameObject floor = GameObject.Instantiate(level.floor) as GameObject;
 					floor.transform.parent = container.transform;
 					floor.transform.position = new Vector3(10 * v.x, 0, 10 * v.y);
+					
+					GameObject roof = GameObject.Instantiate(level.roof) as GameObject;
+					roof.transform.parent = container.transform;
+					roof.transform.localPosition = new Vector3(10 * v.x, 10, 10 * v.y);
 				}
 				
 				for (int i = 1; i < p.Points.Count - 1; i++) {
@@ -424,8 +432,8 @@ namespace Generator {
 			GameObject wall = GameObject.Instantiate(wallPrefab) as GameObject;
 			Vector2 final = pos * 10 - 5 * facing;
 			wall.transform.parent = container.transform;
-			wall.transform.localPosition = new Vector3(final.x, 1.5f, final.y);
-			wall.transform.localScale = new Vector3(1, 1, 0.3f);
+			wall.transform.localPosition = new Vector3(final.x, 5, final.y);
+			wall.transform.localScale = new Vector3(1, 1, 1);
 			float angle = Mathf.Acos(Vector2.Dot(Vector2.up, facing));
 			if (facing.x < 0) {
 				angle = -angle;

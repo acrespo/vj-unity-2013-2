@@ -7,6 +7,8 @@ public class Level : MonoBehaviour {
 	
 	public GameObject wall;
 	
+	public GameObject roof;
+	
 	public int width;
 	
 	public int height;
