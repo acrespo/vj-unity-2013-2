@@ -1966,16 +1966,19 @@ MonoBehaviour:
   gravity: 20
   attackRange: 1.20000005
   attackReloadTime: 1
+  maxLife: 100
   idleAnimation: {fileID: 7400010, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
   walkAnimation: {fileID: 7400002, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
   chaseAnimation: {fileID: 7400004, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
   attackAnimation: {fileID: 7400006, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
   attackAltAnimation: {fileID: 7400008, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
+  dyingAnimation: {fileID: 7400020, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
   idleAnimationSpeed: 1
   walkAnimationSpeed: 1
   chaseAnimationSpeed: 1.79999995
   attackAnimationSpeed: 1
   attackAltAnimationSpeed: 1
+  dyingAnimationSpeed: 1
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

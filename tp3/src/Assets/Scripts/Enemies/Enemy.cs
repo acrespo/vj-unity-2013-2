@@ -7,17 +7,21 @@ public class Enemy : MonoBehaviour
 {
 	public enum EnemyState
 	{
-		Idle = 0,
-		Walking = 1,
-		Chasing = 2,
-		Attacking = 3
+		Idle,
+		Walking,
+		Chasing,
+		Attacking,
+		WaitingForAttack,
+		Dying
 	}
 	
 	public GameObject player;
 	public float speed = 5;
-	public float gravity = 20;
+	public float gravity = 1;
 	public float attackRange = 2;
 	public float attackReloadTime = 1;
+	public float maxLife = 100;
+	public float damage = 10;
 	
 	// animation variables
 	public AnimationClip idleAnimation;
@@ -25,23 +29,32 @@ public class Enemy : MonoBehaviour
 	public AnimationClip chaseAnimation;
 	public AnimationClip attackAnimation;
 	public AnimationClip attackAltAnimation;
+	public AnimationClip dyingAnimation;
 	public float idleAnimationSpeed = 1;
 	public float walkAnimationSpeed = 1;
 	public float chaseAnimationSpeed = 1;
 	public float attackAnimationSpeed = 1;
 	public float attackAltAnimationSpeed = 1;
+	public float dyingAnimationSpeed = 1;
+	public float applyDamageDelayRatio = 0.5f;
 	
 	// private variables
 	private CharacterController controller;
-	private Vector3 moveDirection = Vector3.zero;
+	private Vector3 velocity = Vector3.zero;
 	private EnemyState state;
 	private float lastAttackTime;
+	private float life;
+	private bool damageApplied;
+	private string choosenAttackAnimation;
 	
 	void Awake ()
 	{
 		controller = GetComponent<CharacterController> ();
 		state = EnemyState.Idle;
 		lastAttackTime = 0;
+		life = maxLife;
+		damageApplied = false;
+		choosenAttackAnimation = "";
 		
 		animation [idleAnimation.name].speed = idleAnimationSpeed;
 		animation [walkAnimation.name].speed = walkAnimationSpeed;
@@ -54,61 +67,95 @@ public class Enemy : MonoBehaviour
 	
 	void Update ()
 	{
-		if (player != null) {
-			// get the vector between the player and us
-			Vector3 diff = new Vector3 (player.transform.position.x - transform.position.x, 0, 
-					player.transform.position.z - transform.position.z);
+		// get the vector between the player and us
+		Vector3 diff = new Vector3 (player.transform.position.x - transform.position.x, 0, 
+			player.transform.position.z - transform.position.z);
+		
+		if (state == EnemyState.Idle) {
+			// TODO: proper idle state
+			velocity.x = 0;
+			velocity.z = 0;
+			state = EnemyState.Chasing;
+			animation.CrossFade (idleAnimation.name);
+		} else if (state == EnemyState.Chasing) {
+			// move towards the player
+			Vector2 move = new Vector2(diff.x, diff.z);
+			move.Normalize ();
+			move *= speed;
+			velocity.x = move.x;
+			velocity.z = move.y;
+			animation.CrossFade (chaseAnimation.name);
+			transform.LookAt (transform.position + diff);
 			
-			// attack if we are in range
-			if (diff.sqrMagnitude < attackRange * attackRange) {
-				state = EnemyState.Attacking;
-				moveDirection.x = 0;
-				moveDirection.z = 0;
-				
-				// play the idle animation if necessary
-				if (animation.IsPlaying (walkAnimation.name) || animation.IsPlaying (chaseAnimation.name)) {
-					animation.CrossFade (idleAnimation.name);
-				}
-				
-				// if the reload time is passed
-				if (lastAttackTime + attackReloadTime <= Time.time) {
-					lastAttackTime = Time.time;
-					
-					// randomly use the alternate attack animation
-					if (attackAltAnimation == null || Random.Range (0, 2) == 0) {
-						animation.Play (attackAnimation.name);
-					} else {
-						animation.Play (attackAltAnimation.name);
-					}
-					animation.CrossFadeQueued (idleAnimation.name);
-				}
-			} else if (controller.isGrounded) {
-				// else move towards the player
+			// change state if we reached attack range
+			if (diff.sqrMagnitude <= attackRange * attackRange) {
+				state = EnemyState.WaitingForAttack;
+			}
+		} else if (state == EnemyState.WaitingForAttack) {
+			velocity.x = 0;
+			velocity.z = 0;
+			transform.LookAt (transform.position + diff);
+			animation.CrossFade (idleAnimation.name);
+			
+			// change state if we got out of range
+			if (diff.sqrMagnitude > attackRange * attackRange) {
 				state = EnemyState.Chasing;
-				moveDirection.Set (diff.x, 0, diff.z);
-				moveDirection.Normalize ();
-				moveDirection *= speed;
 			}
 			
-			// face the moving position
+			// start an attack if reload time is passed
+			if (lastAttackTime + attackReloadTime <= Time.time) {
+				lastAttackTime = Time.time;
+				state = EnemyState.Attacking;
+				damageApplied = false;
+				
+				// randomly use the alternate attack animation
+				if (attackAltAnimation == null || Random.Range (0, 2) == 0) {
+					choosenAttackAnimation = attackAnimation.name;
+				} else {
+					choosenAttackAnimation = attackAltAnimation.name;
+				}
+				animation.Play (choosenAttackAnimation);
+			}
+		} else if (state == EnemyState.Attacking) {
+			velocity.x = 0;
+			velocity.z = 0;
 			transform.LookAt (transform.position + diff);
+			
+			// apply damage
+			float applyDamageDelay = animation.GetClip (choosenAttackAnimation).length * applyDamageDelayRatio;
+			if (!damageApplied && lastAttackTime + applyDamageDelay <= Time.time) {
+				damageApplied = true;
+				Debug.Log ("damage player " + damage);
+			}
+			
+			// change state if we finished this attack
+			if (!animation.IsPlaying (choosenAttackAnimation)) {
+				state = EnemyState.WaitingForAttack;
+			}
+		} else if (state == EnemyState.Dying) {
+			velocity.x = 0;
+			velocity.z = 0;
+			
+			// remove gameobject if we finished dying
+			if (!animation.IsPlaying (dyingAnimation.name)) {
+				GameObject.Destroy (gameObject);
+			}
 		}
 		
 		// apply gravity
-		moveDirection.y -= gravity * Time.deltaTime;
+		velocity.y -= gravity * Time.deltaTime;
+		velocity.y = Mathf.Max (velocity.y, -20);
 		
 		// apply the move
-		controller.Move (moveDirection * Time.deltaTime);
-		
-		// animations
-		if (animation != null) {
-			if (state == EnemyState.Idle) {
-				animation.CrossFade (idleAnimation.name);
-			} else if (state == EnemyState.Walking) {
-				animation.CrossFade (walkAnimation.name);
-			} else if (state == EnemyState.Chasing) {
-				animation.CrossFade (chaseAnimation.name);
-			}
+		controller.Move (velocity * Time.deltaTime);
+	}
+	
+	public void Damage (float amount)
+	{
+		life -= amount;
+		if (life <= 0) {
+			state = EnemyState.Dying;
+			animation.Play (dyingAnimation.name);
 		}
 	}
 }

@@ -1456,16 +1456,21 @@ MonoBehaviour:
   gravity: 20
   attackRange: 2
   attackReloadTime: 2
+  maxLife: 200
+  damage: 25
   idleAnimation: {fileID: 7400002, guid: 86c591ebd74142c4d93243d9fa9544da, type: 3}
   walkAnimation: {fileID: 7400004, guid: 86c591ebd74142c4d93243d9fa9544da, type: 3}
   chaseAnimation: {fileID: 7400004, guid: 86c591ebd74142c4d93243d9fa9544da, type: 3}
   attackAnimation: {fileID: 7400008, guid: 86c591ebd74142c4d93243d9fa9544da, type: 3}
   attackAltAnimation: {fileID: 0}
+  dyingAnimation: {fileID: 0}
   idleAnimationSpeed: 1
   walkAnimationSpeed: 1
   chaseAnimationSpeed: 1
   attackAnimationSpeed: 1
   attackAltAnimationSpeed: 1
+  dyingAnimationSpeed: 1
+  applyDamageRatio: .5
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

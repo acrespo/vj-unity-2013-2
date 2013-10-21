@@ -1716,19 +1716,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   speed: 2.20000005
-  gravity: 20
+  gravity: 1
   attackRange: 2
   attackReloadTime: 3
+  maxLife: 400
+  damage: 60
   idleAnimation: {fileID: 7400002, guid: 8ba535c70bbcf7b46b0cba1188faae47, type: 3}
   walkAnimation: {fileID: 7400004, guid: 8ba535c70bbcf7b46b0cba1188faae47, type: 3}
   chaseAnimation: {fileID: 7400004, guid: 8ba535c70bbcf7b46b0cba1188faae47, type: 3}
   attackAnimation: {fileID: 7400010, guid: 8ba535c70bbcf7b46b0cba1188faae47, type: 3}
   attackAltAnimation: {fileID: 7400014, guid: 8ba535c70bbcf7b46b0cba1188faae47, type: 3}
+  dyingAnimation: {fileID: 7400020, guid: 8ba535c70bbcf7b46b0cba1188faae47, type: 3}
   idleAnimationSpeed: 1
   walkAnimationSpeed: 1
   chaseAnimationSpeed: 1
   attackAnimationSpeed: 1
   attackAltAnimationSpeed: 1
+  dyingAnimationSpeed: 1
+  applyDamageDelayRatio: .5
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
