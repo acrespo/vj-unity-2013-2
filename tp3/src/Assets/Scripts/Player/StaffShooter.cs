@@ -5,6 +5,8 @@ public class StaffShooter : MonoBehaviour
 {
 	public const float RELOAD_TIME = 1;
 	public GameObject fireball;
+	public AnimationClip walkAnimation;
+	public AnimationClip attackAnimation;
 	private Camera cam;
 	private float lastShootTime;
 	
@@ -22,6 +24,8 @@ public class StaffShooter : MonoBehaviour
 			Vector3 pos = cam.transform.position + cam.transform.forward * 1;
 			GameObject ball = (GameObject)Instantiate (fireball, pos, Quaternion.identity);
 			ball.rigidbody.AddForce (cam.transform.forward * 1400);
+			animation.Play (attackAnimation.name);
+			animation.CrossFadeQueued (walkAnimation.name);
 		}
 	}
 }

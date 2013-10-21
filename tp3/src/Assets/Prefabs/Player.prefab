@@ -225,6 +225,7 @@ Animation:
   m_Animation: {fileID: 7400000, guid: cffff656c2279486a98cf1508e914ade, type: 2}
   m_Animations:
   - {fileID: 7400000, guid: cffff656c2279486a98cf1508e914ade, type: 2}
+  - {fileID: 7400000, guid: c91827507ede84911bb1a5652c94a93c, type: 2}
   m_WrapMode: 0
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
@@ -346,6 +347,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fireball: {fileID: 100008, guid: 5b0fa523bd3849b41858b5af83beb6df, type: 2}
+  walkAnimation: {fileID: 7400000, guid: cffff656c2279486a98cf1508e914ade, type: 2}
+  attackAnimation: {fileID: 7400000, guid: c91827507ede84911bb1a5652c94a93c, type: 2}
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1
