@@ -18,12 +18,12 @@ public class StaffShooter : MonoBehaviour
 	
 	void FixedUpdate ()
 	{
-		Debug.DrawRay (cam.transform.position, cam.transform.forward * 1);
 		if (Input.GetButton ("Fire1") && Time.time - lastShootTime >= RELOAD_TIME) {
 			lastShootTime = Time.time;
 			Vector3 pos = cam.transform.position + cam.transform.forward * 1;
 			GameObject ball = (GameObject)Instantiate (fireball, pos, Quaternion.identity);
 			ball.rigidbody.AddForce (cam.transform.forward * 1400);
+			ball.rigidbody.AddTorque (Random.Range (-25, 25), Random.Range (-25, 25), Random.Range (-25, 25));
 			animation.Play (attackAnimation.name);
 			animation.CrossFadeQueued (walkAnimation.name);
 		}
