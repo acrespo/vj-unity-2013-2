@@ -1967,6 +1967,7 @@ MonoBehaviour:
   attackRange: 1.20000005
   attackReloadTime: 1
   maxLife: 100
+  damage: 10
   idleAnimation: {fileID: 7400010, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
   walkAnimation: {fileID: 7400002, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
   chaseAnimation: {fileID: 7400004, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
@@ -1979,6 +1980,7 @@ MonoBehaviour:
   attackAnimationSpeed: 1
   attackAltAnimationSpeed: 1
   dyingAnimationSpeed: 1
+  applyDamageDelayRatio: .5
 --- !u!137 &13700000
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

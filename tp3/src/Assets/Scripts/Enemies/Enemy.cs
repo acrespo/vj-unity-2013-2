@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
 		Dying
 	}
 	
-	public GameObject player;
+	public Player player;
 	public float speed = 5;
 	public float gravity = 1;
 	public float attackRange = 2;
@@ -72,14 +72,17 @@ public class Enemy : MonoBehaviour
 			player.transform.position.z - transform.position.z);
 		
 		if (state == EnemyState.Idle) {
-			// TODO: proper idle state
 			velocity.x = 0;
 			velocity.z = 0;
-			state = EnemyState.Chasing;
 			animation.CrossFade (idleAnimation.name);
+			
+			// TODO: proper idle state
+			if (player.GetState () != Player.PlayerState.Dying) {
+				state = EnemyState.Chasing;
+			}
 		} else if (state == EnemyState.Chasing) {
 			// move towards the player
-			Vector2 move = new Vector2(diff.x, diff.z);
+			Vector2 move = new Vector2 (diff.x, diff.z);
 			move.Normalize ();
 			move *= speed;
 			velocity.x = move.x;
@@ -100,6 +103,11 @@ public class Enemy : MonoBehaviour
 			// change state if we got out of range
 			if (diff.sqrMagnitude > attackRange * attackRange) {
 				state = EnemyState.Chasing;
+			}
+			
+			// change state if player is dead
+			if (player.GetState () == Player.PlayerState.Dying) {
+				state = EnemyState.Idle;
 			}
 			
 			// start an attack if reload time is passed
@@ -125,7 +133,7 @@ public class Enemy : MonoBehaviour
 			float applyDamageDelay = animation.GetClip (choosenAttackAnimation).length * applyDamageDelayRatio;
 			if (!damageApplied && lastAttackTime + applyDamageDelay <= Time.time) {
 				damageApplied = true;
-				Debug.Log ("damage player " + damage);
+				player.Damage (damage);
 			}
 			
 			// change state if we finished this attack
