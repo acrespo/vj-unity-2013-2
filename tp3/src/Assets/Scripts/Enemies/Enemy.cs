@@ -94,6 +94,11 @@ public class Enemy : MonoBehaviour
 			if (diff.sqrMagnitude <= attackRange * attackRange) {
 				state = EnemyState.WaitingForAttack;
 			}
+			
+			// change state if player is dead
+			if (player.GetState () == Player.PlayerState.Dying) {
+				state = EnemyState.Idle;
+			}
 		} else if (state == EnemyState.WaitingForAttack) {
 			velocity.x = 0;
 			velocity.z = 0;

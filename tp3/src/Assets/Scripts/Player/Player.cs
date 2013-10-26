@@ -15,11 +15,23 @@ public class Player : MonoBehaviour
 	public AudioClip deathSound;
 	private PlayerState state;
 	private float life;
+	private Camera cam;
 	
 	void Awake ()
 	{
 		life = maxLife;
 		state = PlayerState.Normal;
+		cam = Camera.main;
+	}
+	
+	void FixedUpdate ()
+	{
+		if (state == PlayerState.Dying) {
+			if (Mathf.Abs (cam.transform.rotation.eulerAngles.z - 300) > 10) {
+				cam.transform.Rotate (0, 0, -0.6f);
+				cam.transform.Translate (0.02f, -0.015f, 0);
+			}
+		}
 	}
 	
 	public PlayerState GetState ()
@@ -35,19 +47,30 @@ public class Player : MonoBehaviour
 	public void Damage (float amount)
 	{
 		life -= amount;
+		Debug.Log ("player=" + life);
 		if (life <= 0) {
-			state = PlayerState.Dying;
-			audio.clip = deathSound;
-			Debug.Log ("you are dead");
+			Die ();
 		} else {
 			if (Random.Range (0, 2) == 0) {
 				audio.clip = hitSound1;
 			} else {
 				audio.clip = hitSound2;
 			}
+			if (!audio.isPlaying) {
+				audio.Play ();
+			}
 		}
-		if (!audio.isPlaying) {
-			audio.Play ();
-		}
+	}
+	
+	private void Die ()
+	{
+		state = PlayerState.Dying;
+		audio.clip = deathSound;
+		audio.Play ();
+		GetComponent<MouseLook> ().enabled = false;
+		cam.GetComponent<MouseLook> ().enabled = false;
+		GameObject.Find ("Player/Graphics").renderer.enabled = false;
+		GameObject.Find ("Player/Main Camera/Staff container").SetActive (false);
+		GameObject.Find ("Player/Main Camera/Torch").SetActive (false);
 	}
 }
