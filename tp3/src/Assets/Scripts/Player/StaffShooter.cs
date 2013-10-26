@@ -22,6 +22,15 @@ public class StaffShooter : MonoBehaviour
 			lastShootTime = Time.time;
 			Vector3 pos = cam.transform.position + cam.transform.forward * 1;
 			GameObject ball = (GameObject)Instantiate (fireball, pos, Quaternion.identity);
+			ball.AddComponent<Light>();
+			Light l = ball.light;
+			l.type = LightType.Point;
+			l.intensity = 1;
+			l.color = Color.red + 0.2f * Color.yellow;
+			l.range = 15;
+			
+			l.transform.parent = ball.transform;
+			
 			ball.rigidbody.AddForce (cam.transform.forward * 1400);
 			ball.rigidbody.AddTorque (Random.Range (-25, 25), Random.Range (-25, 25), Random.Range (-25, 25));
 			animation.Play (attackAnimation.name);

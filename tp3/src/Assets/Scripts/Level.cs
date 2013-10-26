@@ -15,5 +15,9 @@ public class Level : MonoBehaviour {
 	
 	public int height;
 	
+	public float difficulty;
 	
+	public GameObject[] enemies;
+	
+	public GameObject boss;
 }
