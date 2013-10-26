@@ -13,6 +13,8 @@ namespace Generator {
 			
 		private const int ROOM_MIN_SIZE = 2;
 		
+		private const int MAX_ENEMIES_PER_ROOM = 4;
+		
 		private int width;
 		
 		private int height;
@@ -31,17 +33,21 @@ namespace Generator {
 		
 		private float gamma;
 		
-		public LevelGenerator (int width, int height, int roomCount) {
-			this.width = width;
-			this.height = height;
+		private Level lvl;
+		
+		public LevelGenerator (Level lvl, int roomCount) {
+			this.lvl = lvl;
+			this.width = lvl.width;
+			this.height = lvl.height;
 			this.roomCount = roomCount;
 			this.rnd = new System.Random();
 			DetermineConstants();
 		}
 		
-		public LevelGenerator (int width, int height, int roomCount, int seed) {
-			this.width = width;
-			this.height = height;
+		public LevelGenerator (Level lvl, int roomCount, int seed) {
+			this.lvl = lvl;
+			this.width = lvl.width;
+			this.height = lvl.height;
 			this.roomCount = roomCount;
 			this.rnd = new System.Random(seed);
 			DetermineConstants();
@@ -298,6 +304,21 @@ namespace Generator {
 				}
 			}
 			
+			int enemyCount = (int) randomNormal(room.EnemyCap * lvl.difficulty, room.EnemyCap / 4.0f) + 1;
+			for (int i = 0; i < enemyCount; i++) {
+				float x = (float) rnd.NextDouble() * (room.Width - 1) + 0.5f;
+				float y = (float) rnd.NextDouble() * (room.Height - 1) + 0.5f;
+				
+				room.AddEnemy(rnd.Next(lvl.enemies.Length), new Vector2(x, y));
+			}
+		}
+		
+		private double randomNormal(double mu, double sigma) {
+			double u1 = rnd.NextDouble(); //these are uniform(0,1) random doubles
+			double u2 = rnd.NextDouble();
+			
+			double randStdNormal = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Sin(2.0 * Math.PI * u2);
+			return mu + sigma * randStdNormal;
 		}
 		
 		public void Populate(Level level) {
@@ -306,6 +327,13 @@ namespace Generator {
 			
 			Room firstRoom = rooms[rooms.Keys[0]];
 			level.playerInstance.transform.position = new Vector3(firstRoom.CenterX * 10, 1, firstRoom.CenterY * 10);
+			Player player = level.playerInstance.GetComponent<Player>();
+			
+			Room lastRoom = rooms.Last().Value;
+			GameObject boss = GameObject.Instantiate(level.boss) as GameObject;
+			boss.transform.parent = go.transform;
+			boss.GetComponent<Enemy>().player = player;
+			boss.transform.position = new Vector3(lastRoom.CenterX * 10, 1, lastRoom.CenterY * 10);
 			
 			foreach (Room r in rooms.Values) {			
 				
@@ -341,6 +369,13 @@ namespace Generator {
 					if (!IsDoor(container, new Vector2(r.Width, j), -Vector2.right)) {
 						PlaceWall(container, level.wall, new Vector2(r.Width, j), -Vector2.right);
 					}
+				}
+				
+				foreach (Room.Enemy e in r.Enemies) {
+					GameObject enemy = GameObject.Instantiate(level.enemies[e.enemyType]) as GameObject;
+					enemy.transform.position = new Vector3((r.X + e.position.x) * 10, 1, (r.Y + e.position.y) * 10);
+					enemy.transform.parent = go.transform;
+					enemy.GetComponent<Enemy>().player = player;
 				}
 			}
 			

@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 namespace Generator {
 
@@ -14,6 +15,8 @@ namespace Generator {
 		private int width;
 		
 		private int pad = 3;
+		
+		private List<Enemy> enemies = new List<Enemy>();
 		
 		public Room (int x, int y, int height, int width) {
 			this.x = x;
@@ -105,6 +108,35 @@ namespace Generator {
 			get {
 				return new Vector2(CenterX, CenterY);
 			}
+		}
+		
+		public void AddEnemy(int enemyType, Vector2 position) {
+			enemies.Add(new Enemy(enemyType, position));
+		}
+		
+		public int EnemyCap {
+			get {
+				return (int) Mathf.Floor (Mathf.Sqrt(this.height * this.width - Mathf.Max(this.height, this.width)));
+			}
+		}
+		
+		public List<Enemy> Enemies {
+			get {
+				return enemies;
+			}
+		}
+		
+		public class Enemy {
+			
+			public int enemyType;
+			
+			public Vector2 position;
+			
+			public Enemy (int enemyType, Vector2 position) {
+				this.enemyType = enemyType;
+				this.position = position;
+			}
+
 		}
 	}
 

@@ -29,7 +29,7 @@ public class LevelGenerator : Editor {
 			
 			Console.WriteLine ("running");
 
-		 	Generator.LevelGenerator g = new Generator.LevelGenerator(level.width, level.height, desiredRooms);
+		 	Generator.LevelGenerator g = new Generator.LevelGenerator(level, desiredRooms);
 			g.Generate();
 			g.Populate(level);
 			EditorUtility.SetDirty(go);
