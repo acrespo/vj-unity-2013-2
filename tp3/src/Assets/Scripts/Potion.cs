@@ -4,17 +4,17 @@ using System.Collections;
 public class Potion : MonoBehaviour
 {
 	public int heal = 60;
-	private Player player;
+	private GameObject player;
 	
 	void Awake ()
 	{
-		player = GameObject.FindGameObjectWithTag ("Player").GetComponent<Player> ();
+		player = GameObject.FindGameObjectWithTag ("Player");
 	}
 	
 	void OnTriggerEnter (Collider other)
 	{
 		if (other.gameObject == player) {
-			player.Heal (heal);
+			player.GetComponent<Player> ().Heal (heal);
 			Destroy (gameObject);
 		}
 	}

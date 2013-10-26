@@ -16,12 +16,14 @@ public class Player : MonoBehaviour
 	private PlayerState state;
 	private float life;
 	private Camera cam;
+	private DamageFlash damageFlash;
 	
 	void Awake ()
 	{
 		life = maxLife;
 		state = PlayerState.Normal;
 		cam = Camera.main;
+		damageFlash = GameObject.FindGameObjectWithTag ("DamageFlash").GetComponent<DamageFlash> ();
 	}
 	
 	void FixedUpdate ()
@@ -47,7 +49,7 @@ public class Player : MonoBehaviour
 	public void Damage (float amount)
 	{
 		life -= amount;
-		Debug.Log ("player=" + life);
+		damageFlash.Flash ();
 		if (life <= 0) {
 			Die ();
 		} else {
