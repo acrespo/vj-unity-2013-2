@@ -36,8 +36,8 @@ public class GameMenuManager : MonoBehaviour
 			break;
 		}
 		
-		GUI.Label(new Rect(Screen.width - 80, 12, 80, 40), "HP: " + world.PlayerHP(), "gameHUD");
-		GUI.Label(new Rect(Screen.width/2 - 40, 12, 80, 40), "Level " + world.GetCurrentLevel(), "gameHUD");
+		GUI.Label(new Rect(5, 0, 80, 40), "HP: " + world.PlayerHP(), "gameHUD");
+		GUI.Label(new Rect(Screen.width/2 - 40, 0, 80, 40), "LEVEL " + world.GetCurrentLevel(), "gameHUD");
 	}
 	
 	public void Pause ()
