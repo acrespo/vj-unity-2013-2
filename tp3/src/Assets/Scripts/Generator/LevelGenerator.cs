@@ -35,20 +35,24 @@ namespace Generator {
 		
 		private Level lvl;
 		
-		public LevelGenerator (Level lvl, int roomCount) {
+		private float trapFactor;
+		
+		public LevelGenerator (Level lvl, int roomCount, float trapFactor) {
 			this.lvl = lvl;
 			this.width = lvl.width;
 			this.height = lvl.height;
 			this.roomCount = roomCount;
+			this.trapFactor = trapFactor;
 			this.rnd = new System.Random();
 			DetermineConstants();
 		}
 		
-		public LevelGenerator (Level lvl, int roomCount, int seed) {
+		public LevelGenerator (Level lvl, int roomCount, float trapFactor, int seed) {
 			this.lvl = lvl;
 			this.width = lvl.width;
 			this.height = lvl.height;
 			this.roomCount = roomCount;
+			this.trapFactor = trapFactor;
 			this.rnd = new System.Random(seed);
 			DetermineConstants();
 		}
@@ -388,6 +392,8 @@ namespace Generator {
 				-Vector2.right
 			};
 			
+			float trapChance = trapFactor * lvl.difficulty;
+			
 			foreach (Path p in paths) {
 				
 				GameObject container = new GameObject(
@@ -421,6 +427,18 @@ namespace Generator {
 						PlaceWall(container, level.wall, points[i], w);
 					}
 					
+					if (from == -to && rnd.NextDouble() < trapChance) {
+						GameObject trap = GameObject.Instantiate(lvl.trap) as GameObject;
+						trap.transform.position = new Vector3(10 * points[i].x, -2, 10 * points[i].y);
+						
+						float angle = Mathf.Acos(Vector2.Dot(Vector2.up, to));
+						if (to.x < 0) {
+							angle = -angle;
+						}
+							
+						trap.transform.localRotation = Quaternion.Euler(0, 90 + angle * 180 / Mathf.PI, 0);
+						trap.transform.parent = go.transform;
+					}
 				}
 				
 				Vector2 last = points[points.Count - 1];
