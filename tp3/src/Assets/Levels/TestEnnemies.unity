@@ -2128,6 +2128,7 @@ MonoBehaviour:
   attackReloadTime: 1
   maxLife: 100
   damage: 10
+  initialState: 0
   idleAnimation: {fileID: 7400010, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
   walkAnimation: {fileID: 7400002, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
   chaseAnimation: {fileID: 7400004, guid: bc600cce01eb57a409f4e69025868a2c, type: 3}
@@ -9498,6 +9499,7 @@ MonoBehaviour:
   attackReloadTime: 3
   maxLife: 400
   damage: 60
+  initialState: 0
   idleAnimation: {fileID: 7400002, guid: 8ba535c70bbcf7b46b0cba1188faae47, type: 3}
   walkAnimation: {fileID: 7400004, guid: 8ba535c70bbcf7b46b0cba1188faae47, type: 3}
   chaseAnimation: {fileID: 7400004, guid: 8ba535c70bbcf7b46b0cba1188faae47, type: 3}
@@ -9560,22 +9562,23 @@ Transform:
 --- !u!114 &1702137763
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11400000, guid: ac728cd2f42289f46aa4e2184b660fb1,
+  m_PrefabParentObject: {fileID: 11400002, guid: ac728cd2f42289f46aa4e2184b660fb1,
     type: 2}
   m_PrefabInternal: {fileID: 793779440}
   m_GameObject: {fileID: 1702137761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f6d94e744676174c85563ad26908694, type: 3}
+  m_Script: {fileID: 11500000, guid: 3db7c4b17ff8c7c479e4b697dfae8da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 124396901}
-  speed: 1.5
+  player: {fileID: 0}
+  speed: 5
   gravity: 1
   attackRange: 2.5
-  attackReloadTime: 3.5
+  attackReloadTime: 3
   maxLife: 500
-  damage: 80
+  damage: 10
+  initialState: 0
   idleAnimation: {fileID: 7400000, guid: dd6550ece43af764e8e9a802baa977e6, type: 3}
   walkAnimation: {fileID: 7400002, guid: dd6550ece43af764e8e9a802baa977e6, type: 3}
   chaseAnimation: {fileID: 7400002, guid: dd6550ece43af764e8e9a802baa977e6, type: 3}
@@ -13969,6 +13972,7 @@ MonoBehaviour:
   attackReloadTime: 1.5
   maxLife: 300
   damage: 35
+  initialState: 0
   idleAnimation: {fileID: 7400002, guid: 86c591ebd74142c4d93243d9fa9544da, type: 3}
   walkAnimation: {fileID: 7400004, guid: 86c591ebd74142c4d93243d9fa9544da, type: 3}
   chaseAnimation: {fileID: 7400004, guid: 86c591ebd74142c4d93243d9fa9544da, type: 3}
