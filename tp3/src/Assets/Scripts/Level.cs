@@ -13,6 +13,8 @@ public class Level : MonoBehaviour {
 	
 	public GameObject trap;
 	
+	public GameObject trigger;
+	
 	public int width;
 	
 	public int height;

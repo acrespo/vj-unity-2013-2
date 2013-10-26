@@ -37,6 +37,13 @@ namespace Generator {
 		
 		private float trapFactor;
 		
+		private static Vector2[] displacements = new Vector2[] {
+			Vector2.right,
+			Vector2.up,
+			-Vector2.up,
+			-Vector2.right
+		};
+		
 		public LevelGenerator (Level lvl, int roomCount, float trapFactor) {
 			this.lvl = lvl;
 			this.width = lvl.width;
@@ -329,68 +336,10 @@ namespace Generator {
 			
 			GameObject go = level.gameObject;
 			
-			Room firstRoom = rooms[rooms.Keys[0]];
-			level.playerInstance.transform.position = new Vector3(firstRoom.CenterX * 10, 1, firstRoom.CenterY * 10);
-			Player player = level.playerInstance.GetComponent<Player>();
 			
-			Room lastRoom = rooms.Last().Value;
-			GameObject boss = GameObject.Instantiate(level.boss) as GameObject;
-			boss.transform.parent = go.transform;
-			boss.GetComponent<Enemy>().player = player;
-			boss.transform.position = new Vector3(lastRoom.CenterX * 10, 1, lastRoom.CenterY * 10);
-			boss.transform.localScale *= 2;
+			PopulateRooms(go);
 			
-			foreach (Room r in rooms.Values) {			
-				
-				GameObject container = new GameObject("Room (x, y) = (" + r.X + ", " + r.Y + ")");
-				container.transform.parent = go.transform;
-				container.transform.position = new Vector3(10 * r.X, 0, 10 * r.Y);
-				
-				for (int i = 0; i <= r.Width; i++) {
-					for (int j = 0; j <= r.Height; j++) {
-						GameObject floor = GameObject.Instantiate(level.floor) as GameObject;
-						floor.transform.parent = container.transform;
-						floor.transform.localPosition = new Vector3(10 * i, 0, 10 * j);
-						
-						GameObject roof = GameObject.Instantiate(level.roof) as GameObject;
-						roof.transform.parent = container.transform;
-						roof.transform.localPosition = new Vector3(10 * i, 10, 10 * j);
-					}
-				}
-				
-				for (int i = 0; i <= r.Width; i++) {
-					if (!IsDoor(container, new Vector2(i, 0), Vector2.up)) {
-						PlaceWall(container, level.wall, new Vector2(i, 0), Vector2.up);
-					}
-					if (!IsDoor(container, new Vector2(i, r.Height), -Vector2.up)) {
-						PlaceWall(container, level.wall, new Vector2(i, r.Height), -Vector2.up);
-					}
-				}
-				
-				for (int j = 0; j <= r.Height; j++) {
-					if (!IsDoor(container, new Vector2(0, j), Vector2.right)) {
-						PlaceWall(container, level.wall, new Vector2(0, j), Vector2.right);
-					}
-					if (!IsDoor(container, new Vector2(r.Width, j), -Vector2.right)) {
-						PlaceWall(container, level.wall, new Vector2(r.Width, j), -Vector2.right);
-					}
-				}
-				
-				foreach (Room.Enemy e in r.Enemies) {
-					GameObject enemy = GameObject.Instantiate(level.enemies[e.enemyType]) as GameObject;
-					enemy.transform.position = new Vector3((r.X + e.position.x) * 10, 1, (r.Y + e.position.y) * 10);
-					enemy.transform.parent = go.transform;
-					enemy.GetComponent<Enemy>().player = player;
-					enemy.transform.localScale *= 2;
-				}
-			}
 			
-			Vector2[] displacements = new Vector2[] {
-				Vector2.right,
-				Vector2.up,
-				-Vector2.up,
-				-Vector2.right
-			};
 			
 			float trapChance = trapFactor * lvl.difficulty;
 			
@@ -475,10 +424,108 @@ namespace Generator {
 					}
 				}
 				
-				
 			}
 			
+			PopulateEnemies(go);
+			
 		}
+		
+		private void PopulateEnemies(GameObject go) {
+			
+			Room firstRoom = rooms.First().Value;
+			lvl.playerInstance.transform.position = new Vector3(firstRoom.CenterX * 10, 1, firstRoom.CenterY * 10);
+			Player player = lvl.playerInstance.GetComponent<Player>();
+			
+			Room lastRoom = rooms.Last().Value;
+			
+			GameObject boss = GameObject.Instantiate(lvl.boss) as GameObject;
+			boss.GetComponent<Enemy>().player = player;
+			boss.transform.position = new Vector3(lastRoom.CenterX * 10, 1, lastRoom.CenterY * 10);
+			boss.transform.localScale *= 2;
+			
+			GameObject firstContainer = new GameObject("Enemies in first room");
+			firstContainer.transform.parent = go.transform;
+			
+			foreach (Room.Enemy e in firstRoom.Enemies) {
+				GameObject enemy = GameObject.Instantiate(lvl.enemies[e.enemyType]) as GameObject;
+				enemy.transform.position = new Vector3((firstRoom.X + e.position.x) * 10, 1, (firstRoom.Y + e.position.y) * 10);
+				enemy.transform.parent = firstContainer.transform;
+				enemy.GetComponent<Enemy>().player = player;
+				enemy.GetComponent<Enemy>().initialState = Enemy.EnemyState.Chasing;
+				enemy.transform.localScale *= 2;
+			}
+			
+			foreach (Path p in paths) {
+				Room r = p.Origin;
+				
+				GameObject container = new GameObject("Room enemies");
+				container.transform.parent = go.transform;
+				
+				GameObject triggerObject = GameObject.Instantiate(lvl.trigger) as GameObject;
+				
+				Vector2 last = p.Points.Last();
+				foreach (Vector2 w in displacements) {
+					
+					if (map[(int) (last.x + w.x), (int) (last.y + w.y)] == TileState.ROOM) {
+						PlaceWallLike(go, triggerObject, last, -w);
+					}
+				}
+				triggerObject.transform.parent = container.transform;
+				
+				foreach (Room.Enemy e in r.Enemies) {
+					GameObject enemy = GameObject.Instantiate(lvl.enemies[e.enemyType]) as GameObject;
+					enemy.transform.position = new Vector3((r.X + e.position.x) * 10, 1, (r.Y + e.position.y) * 10);
+					enemy.transform.parent = container.transform;
+					enemy.GetComponent<Enemy>().player = player;
+					enemy.transform.localScale *= 2;
+				}
+				
+				if (r == rooms.Last().Value) {
+					boss.transform.parent = container.transform;
+				}
+			}
+		}
+		
+		private void PopulateRooms(GameObject go) {
+			
+			foreach (Room r in rooms.Values) {
+				
+				GameObject container = new GameObject("Room (x, y) = (" + r.X + ", " + r.Y + ")");
+				container.transform.parent = go.transform;
+				container.transform.position = new Vector3(10 * r.X, 0, 10 * r.Y);
+				
+				for (int i = 0; i <= r.Width; i++) {
+					for (int j = 0; j <= r.Height; j++) {
+						GameObject floor = GameObject.Instantiate(lvl.floor) as GameObject;
+						floor.transform.parent = container.transform;
+						floor.transform.localPosition = new Vector3(10 * i, 0, 10 * j);
+						
+						GameObject roof = GameObject.Instantiate(lvl.roof) as GameObject;
+						roof.transform.parent = container.transform;
+						roof.transform.localPosition = new Vector3(10 * i, 10, 10 * j);
+					}
+				}
+				
+				for (int i = 0; i <= r.Width; i++) {
+					if (!IsDoor(container, new Vector2(i, 0), Vector2.up)) {
+						PlaceWall(container, lvl.wall, new Vector2(i, 0), Vector2.up);
+					}
+					if (!IsDoor(container, new Vector2(i, r.Height), -Vector2.up)) {
+						PlaceWall(container, lvl.wall, new Vector2(i, r.Height), -Vector2.up);
+					}
+				}
+				
+				for (int j = 0; j <= r.Height; j++) {
+					if (!IsDoor(container, new Vector2(0, j), Vector2.right)) {
+						PlaceWall(container, lvl.wall, new Vector2(0, j), Vector2.right);
+					}
+					if (!IsDoor(container, new Vector2(r.Width, j), -Vector2.right)) {
+						PlaceWall(container, lvl.wall, new Vector2(r.Width, j), -Vector2.right);
+					}
+				}
+			}
+		}
+		
 		
 		private bool IsDoor(GameObject container, Vector2 pos, Vector2 facing) {
 			Vector3 parent = container.transform.position;
@@ -488,6 +535,10 @@ namespace Generator {
 		private void PlaceWall(GameObject container, GameObject wallPrefab, Vector2 pos, Vector2 facing) {
 			
 			GameObject wall = GameObject.Instantiate(wallPrefab) as GameObject;
+			PlaceWallLike(container, wall, pos, facing);
+		}
+		
+		private void PlaceWallLike(GameObject container, GameObject wall, Vector2 pos, Vector2 facing) {
 			Vector2 final = pos * 10 - 5 * facing;
 			wall.transform.parent = container.transform;
 			wall.transform.localPosition = new Vector3(final.x, 5, final.y);

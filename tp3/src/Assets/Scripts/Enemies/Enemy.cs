@@ -22,6 +22,7 @@ public class Enemy : MonoBehaviour
 	public float attackReloadTime = 1;
 	public float maxLife = 100;
 	public float damage = 10;
+	public EnemyState initialState = EnemyState.Idle;
 	
 	// animation variables
 	public AnimationClip idleAnimation;
@@ -50,7 +51,7 @@ public class Enemy : MonoBehaviour
 	void Awake ()
 	{
 		controller = GetComponent<CharacterController> ();
-		state = EnemyState.Idle;
+		state = initialState;
 		lastAttackTime = 0;
 		life = maxLife;
 		damageApplied = false;
@@ -75,11 +76,6 @@ public class Enemy : MonoBehaviour
 			velocity.x = 0;
 			velocity.z = 0;
 			animation.CrossFade (idleAnimation.name);
-			
-			// TODO: proper idle state
-			if (player.GetState () != Player.PlayerState.Dying) {
-				state = EnemyState.Chasing;
-			}
 		} else if (state == EnemyState.Chasing) {
 			// move towards the player
 			Vector2 move = new Vector2 (diff.x, diff.z);
@@ -161,6 +157,11 @@ public class Enemy : MonoBehaviour
 		
 		// apply the move
 		controller.Move (velocity * Time.deltaTime);
+	}
+	
+	public void TriggerChase()
+	{
+		state = EnemyState.Chasing;
 	}
 	
 	public void Damage (float amount)
