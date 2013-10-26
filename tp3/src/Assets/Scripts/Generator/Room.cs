@@ -116,7 +116,7 @@ namespace Generator {
 		
 		public int EnemyCap {
 			get {
-				return (int) Mathf.Floor (Mathf.Sqrt(this.height * this.width - Mathf.Max(this.height, this.width)));
+				return (int) (0.8f * Mathf.Floor (this.height * this.width - Mathf.Max(this.height, this.width)));
 			}
 		}
 		

@@ -334,6 +334,7 @@ namespace Generator {
 			boss.transform.parent = go.transform;
 			boss.GetComponent<Enemy>().player = player;
 			boss.transform.position = new Vector3(lastRoom.CenterX * 10, 1, lastRoom.CenterY * 10);
+			boss.transform.localScale *= 2;
 			
 			foreach (Room r in rooms.Values) {			
 				
@@ -376,6 +377,7 @@ namespace Generator {
 					enemy.transform.position = new Vector3((r.X + e.position.x) * 10, 1, (r.Y + e.position.y) * 10);
 					enemy.transform.parent = go.transform;
 					enemy.GetComponent<Enemy>().player = player;
+					enemy.transform.localScale *= 2;
 				}
 			}
 			
