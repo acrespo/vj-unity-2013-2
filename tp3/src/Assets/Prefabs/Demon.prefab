@@ -926,7 +926,7 @@ GameObject:
   - 4: {fileID: 400122}
   - 111: {fileID: 11100000}
   - 143: {fileID: 14300000}
-  - 114: {fileID: 11400000}
+  - 114: {fileID: 11400002}
   m_Layer: 0
   m_Name: Demon
   m_TagString: Untagged
@@ -1702,7 +1702,7 @@ Animation:
   m_UserAABB:
     m_Center: {x: .00107365847, y: .237832308, z: -.123605222}
     m_Extent: {x: .227624789, y: .254238129, z: .373986155}
---- !u!114 &11400000
+--- !u!114 &11400002
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -1710,16 +1710,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 100122}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f6d94e744676174c85563ad26908694, type: 3}
+  m_Script: {fileID: 11500000, guid: 3db7c4b17ff8c7c479e4b697dfae8da2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}
-  speed: 1.5
+  speed: 5
   gravity: 1
   attackRange: 2.5
-  attackReloadTime: 3.5
+  attackReloadTime: 3
   maxLife: 500
-  damage: 80
+  damage: 10
   idleAnimation: {fileID: 7400000, guid: dd6550ece43af764e8e9a802baa977e6, type: 3}
   walkAnimation: {fileID: 7400002, guid: dd6550ece43af764e8e9a802baa977e6, type: 3}
   chaseAnimation: {fileID: 7400002, guid: dd6550ece43af764e8e9a802baa977e6, type: 3}
