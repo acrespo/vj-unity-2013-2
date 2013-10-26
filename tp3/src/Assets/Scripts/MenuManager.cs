@@ -26,7 +26,7 @@ public class MenuManager : MonoBehaviour
 	private float otherX;
 	private Rect mainWindowRect;
 	
-	void Start () {
+	void Start() {
 		outsideLeftX = -Screen.width;
 		outsideRightX = Screen.width*2;
 		mainX = baseX;
