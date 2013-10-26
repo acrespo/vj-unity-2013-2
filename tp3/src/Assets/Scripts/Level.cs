@@ -11,6 +11,8 @@ public class Level : MonoBehaviour {
 	
 	public GameObject playerInstance;
 	
+	public GameObject trap;
+	
 	public int width;
 	
 	public int height;

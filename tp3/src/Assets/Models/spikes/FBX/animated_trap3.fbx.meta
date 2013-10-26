@@ -34,13 +34,13 @@ ModelImporter:
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
-    animationWrapMode: 0
+    animationWrapMode: 2
     clipAnimations:
     - name: Up Down
       takeName: 
       firstFrame: 1
       lastFrame: 70
-      wrapMode: 0
+      wrapMode: 2
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
