@@ -62,6 +62,11 @@ public class Player : MonoBehaviour
 		}
 	}
 	
+	public void Heal (float amount)
+	{
+		life += amount;
+	}
+	
 	private void Die ()
 	{
 		state = PlayerState.Dying;
