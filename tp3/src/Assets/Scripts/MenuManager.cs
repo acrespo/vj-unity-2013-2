@@ -156,9 +156,9 @@ public class MenuManager : MonoBehaviour
 		
 		GUILayout.Label("Credits");
 		
-		GUILayout.Button("Juan");
-		GUILayout.Button("Alvaro");
-		GUILayout.Button("Frederic");
+		GUILayout.Button("Juan", "buttonLabelStyle");
+		GUILayout.Button("Alvaro", "buttonLabelStyle");
+		GUILayout.Button("Frederic", "buttonLabelStyle");
 		
 		if (GUILayout.Button("Back", "button")) {
 			state = "transitionCreditsBack";

@@ -147,7 +147,7 @@ public class Enemy : MonoBehaviour
 			
 			// remove gameobject if we finished dying
 			if (!animation.IsPlaying (dyingAnimation.name)) {
-				GameObject.Destroy (gameObject);
+				PassedToAfterLife();
 			}
 		}
 		
@@ -162,6 +162,9 @@ public class Enemy : MonoBehaviour
 	public void TriggerChase()
 	{
 		state = EnemyState.Chasing;
+	}
+	protected virtual void PassedToAfterLife() {
+		GameObject.Destroy (gameObject);
 	}
 	
 	public void Damage (float amount)

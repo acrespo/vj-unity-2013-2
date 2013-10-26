@@ -63,7 +63,6 @@ GameObject:
   - 92: {fileID: 9200000}
   - 124: {fileID: 12400000}
   - 81: {fileID: 8100000}
-  - 114: {fileID: 11400004}
   m_Layer: 9
   m_Name: HUD
   m_TagString: GUICamera
@@ -280,7 +279,6 @@ MonoBehaviour:
   overlay: {fileID: 2800000, guid: 82b0e39327ff7e5428586afbfbd24c07, type: 3}
   popupWidth: 450
   popupHeight: 150
-  map: {fileID: 0}
   world: {fileID: 0}
 --- !u!114 &11400002
 MonoBehaviour:
@@ -294,17 +292,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GUICam: {fileID: 2000000}
---- !u!114 &11400004
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100006}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb97e36b5760a9343810594e38718f5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!124 &12400000
 Behaviour:
   m_ObjectHideFlags: 1

@@ -8,16 +8,18 @@ public class GameMenuManager : MonoBehaviour
 	public Texture2D overlay;
 	public int popupWidth = 450;
 	public int popupHeight = 150;
-	public GameObject map;
 	public World world;
 	private WorldState state = WorldState.Loading;
-
+	
+	void Start() {
+		world = World.Instance;
+	}
+	
 	void OnGUI ()
 	{
 		GUI.skin = skin;
 		
 		GUI.DrawTexture(new Rect (0, 0, Screen.width, 40), overlay);
-		//GUI.Label(new Rect(12, 12, 200, 40), "Enemies left: " + world.GetEnemyManager().GetTanksLeft(), "gameHUD");
 	
 		switch (state) {
 		case WorldState.Loading:
@@ -77,10 +79,7 @@ public class GameMenuManager : MonoBehaviour
 		}
 
 		if (GUI.Button(restartRect, "Restart", "gameMessage")) {
-			//if (world.PlayerLives <= 0) {
-			//	world.PlayerLives = 3;
-			//}
-			//world.RestartLevel();
+			world.RestartLevel();
 		}
 	}
 
@@ -95,7 +94,7 @@ public class GameMenuManager : MonoBehaviour
 		GUILayout.Label ("Game paused", "pauseTitle");
 		
 		if (GUILayout.Button ("Continue", "pauseButton")) {
-			//world.Unpause ();
+			world.Unpause ();
 		}
 		
 		if (GUILayout.Button ("Exit", "pauseButton")) {

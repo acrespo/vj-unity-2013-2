@@ -5,38 +5,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Collections;
 
-public class World : MonoBehaviour {
+public class World : Singleton<World> {
 	
 	public GameMenuManager gameMenuManager;
-//	private EnemyManager enemyManager;
 	private bool paused = false;
 	private int currentLevel;
 	public Player player;
 	private float previousTimeScale = 1;
 	
 	
-		void Start () {
-//		enemyManager = new EnemyManager(transform, () => LoadNextLevel());
-		
-		currentLevel = 0;
-		LoadNextLevel();
+	void Start () {
+		currentLevel = Application.loadedLevel;
 	}
 	
 	public float PlayerHP() {
 		return player.GetLife();
 	}
 	
-	void LoadNextLevel() {
-		//TODO: Actually load next level
+	public void LoadNextLevel() {
+		Application.LoadLevel(currentLevel+1);
 	}
 	
-	
 	public void RestartLevel() {
-		//TODO: Restart
+		Application.LoadLevel(currentLevel);
 	}
 	
 	void Update () {
-		
 		if (Input.GetKeyDown(KeyCode.Escape)) {
 			if (paused) {
 				Unpause();
@@ -47,12 +41,11 @@ public class World : MonoBehaviour {
 	}
 	
 	void OnGUI() {
-		
+
 		if (GUI.Button(new Rect(0, 0, 20, 20), "Next")) {
 			LoadNextLevel();
 		}
 	}
-	
 	
 	public void Pause() {
 		paused = true;
@@ -66,10 +59,6 @@ public class World : MonoBehaviour {
 		Time.timeScale = previousTimeScale;
 		gameMenuManager.Unpause();
 	}
-	
-//	public EnemyManager GetEnemyManager() {
-//		return enemyManager;
-//	}
 	
 	public int GetCurrentLevel() {
 		return currentLevel;
