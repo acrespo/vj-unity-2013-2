@@ -251,7 +251,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 100006}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: -4.37113883e-08}
-  m_LocalPosition: {x: 0, y: 1, z: 6}
+  m_LocalPosition: {x: 340, y: 1, z: 370}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 400004}
@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2893084f9afd16e4ab503dce79aa7182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 600
+  maxLife: 300
   hitSound1: {fileID: 8300000, guid: 54447dd24efed0f429ef5023608e9050, type: 3}
   hitSound2: {fileID: 8300000, guid: 7499fc3e30d57d046a61e42e04f5924f, type: 3}
   deathSound: {fileID: 8300000, guid: 6f6db8c736729094a8c53f9e9a3d869d, type: 3}
