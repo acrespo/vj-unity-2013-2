@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameMenuManager : MonoBehaviour
+public class GameMenuManager : Singleton<GameMenuManager>
 {
 	public GUISkin skin;
 	public Texture2D background;
 	public Texture2D overlay;
 	public int popupWidth = 450;
 	public int popupHeight = 150;
-	public World world;
+	private World world;
 	private WorldState state = WorldState.Loading;
 	
 	void Start() {

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
 	public enum PlayerState
 	{
@@ -23,7 +23,8 @@ public class Player : MonoBehaviour
 		life = maxLife;
 		state = PlayerState.Normal;
 		cam = Camera.main;
-		damageFlash = GameObject.FindGameObjectWithTag ("DamageFlash").GetComponent<DamageFlash> ();
+//		damageFlash = GameObject.FindGameObjectWithTag ("DamageFlash").GetComponent<DamageFlash> ();
+		damageFlash = DamageFlash.Instance;
 	}
 	
 	void FixedUpdate ()

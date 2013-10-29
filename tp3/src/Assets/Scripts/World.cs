@@ -16,6 +16,8 @@ public class World : Singleton<World> {
 	
 	void Start () {
 		currentLevel = Application.loadedLevel;
+		player = Player.Instance;
+		gameMenuManager = GameMenuManager.Instance;
 	}
 	
 	public float PlayerHP() {
