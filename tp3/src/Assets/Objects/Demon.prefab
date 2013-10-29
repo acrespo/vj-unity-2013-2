@@ -1719,7 +1719,8 @@ MonoBehaviour:
   attackRange: 2.5
   attackReloadTime: 3
   maxLife: 500
-  damage: 10
+  damage: 90
+  initialState: 0
   idleAnimation: {fileID: 7400000, guid: dd6550ece43af764e8e9a802baa977e6, type: 3}
   walkAnimation: {fileID: 7400002, guid: dd6550ece43af764e8e9a802baa977e6, type: 3}
   chaseAnimation: {fileID: 7400002, guid: dd6550ece43af764e8e9a802baa977e6, type: 3}

@@ -533,7 +533,7 @@ MonoBehaviour:
   physicMat: {fileID: 0}
   explosionSound: {fileID: 8200002}
   explosionRadius: 2
-  explosionDamage: 200
+  explosionDamage: 160
 --- !u!1002 &11400003
 EditorExtensionImpl:
   serializedVersion: 6
