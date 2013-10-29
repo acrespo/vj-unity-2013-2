@@ -72,7 +72,7 @@ public class GameMenuManager : Singleton<GameMenuManager>
 	}
 		
 	private void showGameOverOptions() {
-		Rect backRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 80, 200, 60);
+		Rect backRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 60, 200, 60);
 		Rect restartRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 110, 200, 60);
 		if (GUI.Button(backRect, "Back to menu", "pauseButton")) {
 			Application.LoadLevel(0);

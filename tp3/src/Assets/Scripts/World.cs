@@ -18,6 +18,7 @@ public class World : Singleton<World> {
 		currentLevel = Application.loadedLevel;
 		player = Player.Instance;
 		gameMenuManager = GameMenuManager.Instance;
+		Unpause();
 	}
 	
 	public float PlayerHP() {
@@ -25,10 +26,18 @@ public class World : Singleton<World> {
 	}
 	
 	public void LoadNextLevel() {
-		Application.LoadLevel(currentLevel+1);
+		if (currentLevel == 5) {
+			paused = true;
+			previousTimeScale = Time.timeScale;
+			Time.timeScale = 0;
+			gameMenuManager.GameOver(true);	
+		} else {
+			Application.LoadLevel(currentLevel+1);
+		}
 	}
 	
 	public void RestartLevel() {
+		Unpause();
 		Application.LoadLevel(currentLevel);
 	}
 	
