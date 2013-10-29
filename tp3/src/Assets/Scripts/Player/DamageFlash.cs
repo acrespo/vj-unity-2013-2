@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DamageFlash : MonoBehaviour
+public class DamageFlash : Singleton<DamageFlash>
 {
 	public float fadeSpeed = 5;
 	private string state;

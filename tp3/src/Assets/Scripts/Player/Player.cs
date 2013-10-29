@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Player : MonoBehaviour
+public class Player : Singleton<Player>
 {
 	public enum PlayerState
 	{
@@ -23,7 +23,8 @@ public class Player : MonoBehaviour
 		life = maxLife;
 		state = PlayerState.Normal;
 		cam = Camera.main;
-		damageFlash = GameObject.FindGameObjectWithTag ("DamageFlash").GetComponent<DamageFlash> ();
+//		damageFlash = GameObject.FindGameObjectWithTag ("DamageFlash").GetComponent<DamageFlash> ();
+		damageFlash = DamageFlash.Instance;
 	}
 	
 	void FixedUpdate ()
@@ -32,6 +33,8 @@ public class Player : MonoBehaviour
 			if (Mathf.Abs (cam.transform.rotation.eulerAngles.z - 300) > 10) {
 				cam.transform.Rotate (0, 0, -0.6f);
 				cam.transform.Translate (0.02f, -0.015f, 0);
+			} else {
+				World.Instance.gameMenuManager.GameOver(false);
 			}
 		}
 	}
@@ -51,6 +54,7 @@ public class Player : MonoBehaviour
 		life -= amount;
 		damageFlash.Flash ();
 		if (life <= 0) {
+			life = 0;
 			Die ();
 		} else {
 			if (Random.Range (0, 2) == 0) {
@@ -79,5 +83,6 @@ public class Player : MonoBehaviour
 		GameObject.Find ("Player/Graphics").renderer.enabled = false;
 		GameObject.Find ("Player/Main Camera/Staff container").SetActive (false);
 		GameObject.Find ("Player/Main Camera/Torch").SetActive (false);
+		
 	}
 }

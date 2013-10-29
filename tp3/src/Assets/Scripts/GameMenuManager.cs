@@ -1,14 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameMenuManager : MonoBehaviour
+public class GameMenuManager : Singleton<GameMenuManager>
 {
 	public GUISkin skin;
 	public Texture2D background;
 	public Texture2D overlay;
 	public int popupWidth = 450;
 	public int popupHeight = 150;
-	public World world;
+	private World world;
 	private WorldState state = WorldState.Loading;
 	
 	void Start() {
@@ -26,11 +26,11 @@ public class GameMenuManager : MonoBehaviour
 			//GUI.Label(new Rect((Screen.width - 80) / 2, (Screen.height - 40) / 2, 80, 40), "Level " + world.GetCurrentLevel(), "gameMessage");
 			break;
 		case WorldState.Won:
-			GUI.Label(new Rect((Screen.width - 80) / 2, (Screen.height - 40) / 2, 80, 40), "You Won!", "gameMessage");
+			GUI.Label(new Rect((Screen.width - 600) / 2, (Screen.height-100) / 2, 600, 100), "You Won!", "gameMessage");
 			showGameOverOptions();
 			break;
 		case WorldState.Lost:
-			GUI.Label(new Rect((Screen.width - 80) / 2, (Screen.height - 40) / 2, 80, 40), "Mess with the best, die like the rest!\n Game Over!", "gameMessage");
+			GUI.Label(new Rect((Screen.width - 600) / 2, (Screen.height-200-25) / 2, 600, 200), "Run you fools!\n Game Over!", "gameMessage");
 			showGameOverOptions();
 			break;
 		case WorldState.Pause:
@@ -72,13 +72,13 @@ public class GameMenuManager : MonoBehaviour
 	}
 		
 	private void showGameOverOptions() {
-		Rect backRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 50, 200, 60);
-		Rect restartRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 100, 200, 60);
-		if (GUI.Button(backRect, "Back to menu", "gameMessage")) {
+		Rect backRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 80, 200, 60);
+		Rect restartRect = new Rect(Screen.width / 2 - 100, Screen.height / 2 + 110, 200, 60);
+		if (GUI.Button(backRect, "Back to menu", "pauseButton")) {
 			Application.LoadLevel(0);
 		}
 
-		if (GUI.Button(restartRect, "Restart", "gameMessage")) {
+		if (GUI.Button(restartRect, "Restart", "pauseButton")) {
 			world.RestartLevel();
 		}
 	}
@@ -98,6 +98,7 @@ public class GameMenuManager : MonoBehaviour
 		}
 		
 		if (GUILayout.Button ("Exit", "pauseButton")) {
+			world.Unpause ();
 			Application.LoadLevel(0);
 		}
 		
