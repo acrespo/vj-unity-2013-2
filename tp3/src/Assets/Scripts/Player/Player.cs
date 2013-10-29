@@ -33,6 +33,8 @@ public class Player : Singleton<Player>
 			if (Mathf.Abs (cam.transform.rotation.eulerAngles.z - 300) > 10) {
 				cam.transform.Rotate (0, 0, -0.6f);
 				cam.transform.Translate (0.02f, -0.015f, 0);
+			} else {
+				World.Instance.gameMenuManager.GameOver(false);
 			}
 		}
 	}
@@ -80,5 +82,6 @@ public class Player : Singleton<Player>
 		GameObject.Find ("Player/Graphics").renderer.enabled = false;
 		GameObject.Find ("Player/Main Camera/Staff container").SetActive (false);
 		GameObject.Find ("Player/Main Camera/Torch").SetActive (false);
+		
 	}
 }
