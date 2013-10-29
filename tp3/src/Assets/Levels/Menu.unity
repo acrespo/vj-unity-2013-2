@@ -192,19 +192,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skin: {fileID: 11400000, guid: 7953503d9e83f8d469b84619849edd4e, type: 2}
-  background: {fileID: 2800000, guid: c357b906baf44924e83e86c046ca94ff, type: 3}
-  spikesY: 0
-  titleX: 0
-  titleY: 0
-  baseX: 50
-  mainY: 60
-  fancyTopY: 3
-  titleHeight: 50
+  baseX: 0
   titleFontSize: 34
-  fancyTopOffsetX: 60
-  spikesWidth: 300
-  deathBadgeX: 0
-  deathBadgeY: 0
-  waxSealX: 0
-  waxSealY: 0
-  mainX: 0
