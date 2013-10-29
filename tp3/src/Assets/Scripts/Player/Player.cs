@@ -54,6 +54,7 @@ public class Player : Singleton<Player>
 		life -= amount;
 		damageFlash.Flash ();
 		if (life <= 0) {
+			life = 0;
 			Die ();
 		} else {
 			if (Random.Range (0, 2) == 0) {
