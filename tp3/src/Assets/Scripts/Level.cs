@@ -15,6 +15,8 @@ public class Level : MonoBehaviour {
 	
 	public GameObject trigger;
 	
+	public GameObject door;
+	
 	public int width;
 	
 	public int height;
