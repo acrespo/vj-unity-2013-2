@@ -4827,7 +4827,7 @@ MonoBehaviour:
   attackRange: 2.5
   attackReloadTime: 3
   maxLife: 500
-  damage: 10
+  damage: 90
   initialState: 0
   idleAnimation: {fileID: 7400000, guid: dd6550ece43af764e8e9a802baa977e6, type: 3}
   walkAnimation: {fileID: 7400002, guid: dd6550ece43af764e8e9a802baa977e6, type: 3}
@@ -36409,7 +36409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a37ded99a1969e740bba257faadceecd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  heal: 60
+  heal: 80
 --- !u!95 &1572910950
 Animator:
   m_ObjectHideFlags: 0
@@ -46197,7 +46197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2893084f9afd16e4ab503dce79aa7182, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxLife: 600
+  maxLife: 300
   hitSound1: {fileID: 8300000, guid: 54447dd24efed0f429ef5023608e9050, type: 3}
   hitSound2: {fileID: 8300000, guid: 7499fc3e30d57d046a61e42e04f5924f, type: 3}
   deathSound: {fileID: 8300000, guid: 6f6db8c736729094a8c53f9e9a3d869d, type: 3}
