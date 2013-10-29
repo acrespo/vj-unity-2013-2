@@ -12,12 +12,22 @@ public class World : Singleton<World> {
 	private int currentLevel;
 	public Player player;
 	private float previousTimeScale = 1;
+	private CharacterMotor mMotor;
+	private FPSInputController mFPS;
+	private MouseLook mMouseLook;
+	private CharacterController mCharController;
+	private MouseLook mCamMouseLook;
 	
 	
 	void Start () {
 		currentLevel = Application.loadedLevel;
 		player = Player.Instance;
 		gameMenuManager = GameMenuManager.Instance;
+		mMotor = player.GetComponent<CharacterMotor>();
+		mFPS = player.GetComponent<FPSInputController>();
+		mMouseLook = player.GetComponent<MouseLook>();
+		mCharController = player.GetComponent<CharacterController>();
+		mCamMouseLook = Camera.main.GetComponent<MouseLook>();
 		Unpause();
 	}
 	
@@ -62,15 +72,25 @@ public class World : Singleton<World> {
 		paused = true;
 		previousTimeScale = Time.timeScale;
 		Time.timeScale = 0;
+		setMouseLook(!paused);
 		gameMenuManager.Pause();
 	}
 	
 	public void Unpause() {
 		paused = false;
 		Time.timeScale = previousTimeScale;
+		setMouseLook(!paused);
 		gameMenuManager.Unpause();
 	}
 	
+	public void setMouseLook(bool b) {
+		mFPS.enabled = b;
+		mMotor.enabled = b;
+		mMouseLook.enabled = b;
+		mFPS.enabled = b;
+		mCharController.enabled = b;
+		mCamMouseLook.enabled = b;
+	}
 	public int GetCurrentLevel() {
 		return currentLevel;
 	}
