@@ -68,9 +68,11 @@ public class Player : Singleton<Player>
 		}
 	}
 	
-	public void Heal (float amount)
-	{
+	public void Heal (float amount) {
 		life += amount;
+		if (life > maxLife) {
+			life = maxLife;
+		}
 	}
 	
 	private void Die ()
