@@ -40,6 +40,7 @@ public class World : Singleton<World> {
 			paused = true;
 			previousTimeScale = Time.timeScale;
 			Time.timeScale = 0;
+			setMouseLook(false);
 			gameMenuManager.GameOver(true);	
 		} else {
 			Application.LoadLevel(currentLevel+1);

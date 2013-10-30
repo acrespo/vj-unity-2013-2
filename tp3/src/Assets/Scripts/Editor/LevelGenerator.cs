@@ -38,7 +38,7 @@ public class LevelGenerator : Editor {
 			Console.WriteLine ("running");
 			
 			Generator.LevelGenerator g;
-			if (seedValue != 0) {
+			if (seedValue == 0) {
 		 		g = new Generator.LevelGenerator(level, desiredRooms, trapFactor);
 			} else {
 				g = new Generator.LevelGenerator(level, desiredRooms, trapFactor, seedValue);
