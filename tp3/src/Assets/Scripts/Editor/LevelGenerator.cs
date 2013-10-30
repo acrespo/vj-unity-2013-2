@@ -12,12 +12,16 @@ public class LevelGenerator : Editor {
 	[SerializeField]
 	float trapFactor;
 	
+	[SerializeField]
+	int seedValue;
+	
 	public override void OnInspectorGUI ()
 	{
 		DrawDefaultInspector();
 
 		desiredRooms = EditorGUILayout.IntField("Target Room Count", desiredRooms);
 		trapFactor = EditorGUILayout.FloatField("Path Trap Factor", trapFactor);
+		trapFactor = EditorGUILayout.IntField("Seed Value", seedValue);
 		
 		if (GUILayout.Button("Generate")) {
 			
@@ -32,8 +36,13 @@ public class LevelGenerator : Editor {
 			}
 			
 			Console.WriteLine ("running");
-
-		 	Generator.LevelGenerator g = new Generator.LevelGenerator(level, desiredRooms, trapFactor);
+			
+			Generator.LevelGenerator g;
+			if (seedValue != 0) {
+		 		g = new Generator.LevelGenerator(level, desiredRooms, trapFactor);
+			} else {
+				g = new Generator.LevelGenerator(level, desiredRooms, trapFactor, seedValue);
+			}
 			g.Generate();
 			g.Populate(level);
 			EditorUtility.SetDirty(go);
