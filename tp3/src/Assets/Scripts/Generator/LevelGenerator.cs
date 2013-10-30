@@ -462,15 +462,24 @@ namespace Generator {
 				container.transform.parent = go.transform;
 				
 				GameObject triggerObject = GameObject.Instantiate(lvl.trigger) as GameObject;
+				GameObject door = GameObject.Instantiate(lvl.door) as GameObject;
 				
 				Vector2 last = p.Points.Last();
 				foreach (Vector2 w in displacements) {
 					
 					if (map[(int) (last.x + w.x), (int) (last.y + w.y)] == TileState.ROOM) {
-						PlaceWallLike(go, triggerObject, last, -w);
+						PlaceWallLike(go, triggerObject, last, w);
+						PlaceWallLike(go, door, last, -w, 0);
 					}
 				}
 				triggerObject.transform.parent = container.transform;
+				
+				door.transform.parent = container.transform;
+				Vector3 pos = door.transform.localPosition;
+				pos.y = 0;
+				door.transform.localPosition = pos;
+				door.transform.localScale = new Vector3(6, 5, 6);
+
 				
 				foreach (Room.Enemy e in r.Enemies) {
 					GameObject enemy = GameObject.Instantiate(lvl.enemies[e.enemyType]) as GameObject;
@@ -539,6 +548,10 @@ namespace Generator {
 		}
 		
 		private void PlaceWallLike(GameObject container, GameObject wall, Vector2 pos, Vector2 facing) {
+			PlaceWallLike(container, wall, pos, facing, 90);
+		}
+		
+		private void PlaceWallLike(GameObject container, GameObject wall, Vector2 pos, Vector2 facing, float xAngle) {
 			Vector2 final = pos * 10 - 5 * facing;
 			wall.transform.parent = container.transform;
 			wall.transform.localPosition = new Vector3(final.x, 5, final.y);
@@ -548,7 +561,7 @@ namespace Generator {
 				angle = -angle;
 			}
 				
-			wall.transform.localRotation = Quaternion.Euler(90, angle * 180 / Mathf.PI, 0);
+			wall.transform.localRotation = Quaternion.Euler(xAngle, angle * 180 / Mathf.PI, 0);
 		}
 		
 		public enum TileState {
