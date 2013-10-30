@@ -25,6 +25,11 @@ public class Player : Singleton<Player>
 		cam = Camera.main;
 //		damageFlash = GameObject.FindGameObjectWithTag ("DamageFlash").GetComponent<DamageFlash> ();
 		damageFlash = DamageFlash.Instance;
+		
+		bool useSound = PlayerPrefs.GetInt ("sound", 1) == 1;
+		if (!useSound) {
+			AudioListener.pause = true;
+		}
 	}
 	
 	void FixedUpdate ()
